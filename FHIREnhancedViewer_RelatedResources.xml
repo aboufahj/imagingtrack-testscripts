@@ -1,0 +1,297 @@
+<TestScript xmlns="http://hl7.org/fhir">
+    <id value="FHIREnhancedViewer_RelatedResources"/>
+    <url value="https://build.fhir.org/ig/HL7/TestScript-RDSP-Simulator.json"/>
+    <name value="FHIREnhancedViewer_RelatedResources"/>
+    <status value="active"/>
+    <date value="2021-08-15"/>
+    <publisher value="HL7 Imaging Integration Workgroup"/>
+    <contact>
+        <name value="HL7 Imaging Integration Workgroup"/>
+        <telecom>
+            <system value="url"/>
+            <value value="http://www.hl7.org/Special/committees/imagemgt/index.cfm"/>
+        </telecom>
+    </contact>
+    <contact>
+        <name value="Abderrazek Boufahja"/>
+        <telecom>
+            <system value="email"/>
+            <value value="abderrazek.boufahja@ge.com"/>
+        </telecom>
+    </contact>
+    <description value="TestScript to simulate an EMR capacity to share ImagingStudy and its related resources."/>
+    <copyright value="HL7 2021"/>
+    <origin>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types"/>
+            <code value="FHIR-Client"/>
+            <display value="FHIR Client"/>
+        </profile>
+    </origin>
+    <destination>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-destination-types"/>
+            <code value="FHIR-Server"/>
+            <display value="FHIR Server"/>
+        </profile>
+    </destination>
+    <variable>
+        <name value="imagingStudyResourceId"/>
+		<defaultValue value="example-xr"/>
+        <description value="Enter the ImagingStudy ID"/>
+    </variable>
+	<variable>
+        <name value="subjectLink"/>
+        <path value="ImagingStudy/subject/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="encounterLink"/>
+        <path value="ImagingStudy/encounter/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="basedonLink"/>
+        <path value="ImagingStudy/basedOn/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="referrerLink"/>
+        <path value="ImagingStudy/referrer/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="interpreterLink"/>
+        <path value="ImagingStudy/interpreter/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="procedureLink"/>
+        <path value="ImagingStudy/procedureReference/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="reasonReferenceLink"/>
+        <path value="ImagingStudy/reasonReference/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+    <test>
+        <name value="FHIREnhancedViewer_RelatedResources"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Read the ImagingStudy ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${imagingStudyResourceId}"/>
+                <responseId value="imagingstudy-read-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestSubjectLink"/>
+        <description value="This tests the capacity of a FHIR Server to share subject resource."/>
+		<!-- TODO check how to make this action possible -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the returned HTTP status is 200(OK)."/> -->
+                <!-- <expression value="${subjectLink}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the subject resource ${subjectLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="subject-read-response"/>
+				<url value="${subjectLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestEncounterLink"/>
+        <description value="This tests the capacity of a FHIR Server to share encounter resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the encounter resource ${encounterLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="encounter-read-response"/>
+				<url value="${encounterLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestBasedonLink"/>
+        <description value="This tests the capacity of a FHIR Server to share basedon resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the basedon resource ${basedonLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="basedon-read-response"/>
+				<url value="${basedonLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestReferrerLink"/>
+        <description value="This tests the capacity of a FHIR Server to share referrer resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the referrer resource ${referrerLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="encounter-read-response"/>
+				<url value="${referrerLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestInterpreterLink"/>
+        <description value="This tests the capacity of a FHIR Server to share interpreter resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the interpreter resource ${interpreterLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="interpreter-read-response"/>
+				<url value="${interpreterLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestProcedureLink"/>
+        <description value="This tests the capacity of a FHIR Server to share procedure resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the procedure resource ${procedureLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="procedure-read-response"/>
+				<url value="${procedureLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+	<test>	
+		<name value="FHIREnhancedViewer_TestReasonReferenceLink"/>
+        <description value="This tests the capacity of a FHIR Server to share reasonReference resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the reasonReference resource ${reasonReferenceLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="reason-reference-read-response"/>
+				<url value="${reasonReferenceLink}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>	
+</TestScript>

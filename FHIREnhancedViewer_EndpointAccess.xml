@@ -1,0 +1,101 @@
+<TestScript xmlns="http://hl7.org/fhir">
+    <id value="FHIREnhancedViewer_EndpointAccess"/>
+    <url value="https://build.fhir.org/ig/HL7/TestScript-RDSP-Simulator.json"/>
+    <name value="FHIREnhancedViewer_EndpointAccess"/>
+    <status value="active"/>
+    <date value="2021-08-15"/>
+    <publisher value="HL7 Imaging Integration Workgroup"/>
+    <contact>
+        <name value="HL7 Imaging Integration Workgroup"/>
+        <telecom>
+            <system value="url"/>
+            <value value="http://www.hl7.org/Special/committees/imagemgt/index.cfm"/>
+        </telecom>
+    </contact>
+    <contact>
+        <name value="Abderrazek Boufahja"/>
+        <telecom>
+            <system value="email"/>
+            <value value="abderrazek.boufahja@ge.com"/>
+        </telecom>
+    </contact>
+    <description value="TestScript to simulate an EMR capacity to share ImagingStudy and Endpoint resources."/>
+    <copyright value="HL7 2021"/>
+    <origin>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types"/>
+            <code value="FHIR-Client"/>
+            <display value="FHIR Client"/>
+        </profile>
+    </origin>
+    <destination>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-destination-types"/>
+            <code value="FHIR-Server"/>
+            <display value="FHIR Server"/>
+        </profile>
+    </destination>
+    <variable>
+        <name value="imagingStudyResourceId"/>
+		<defaultValue value="example-xr"/>
+        <description value="Enter the ImagingStudy ID"/>
+    </variable>
+	<variable>
+        <name value="endpointId"/>
+        <path value="ImagingStudy/endpoint/reference" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+    <test>
+        <name value="FHIREnhancedViewer_EndpointAccess"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources and test access to Endpoint resource."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Read the ImagingStudy ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${imagingStudyResourceId}"/>
+                <responseId value="imagingstudy-read-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the Endpoint resource ${endpointId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <responseId value="endpoint-read-response"/>
+				<url value="${endpointId}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		
+    </test>
+</TestScript>

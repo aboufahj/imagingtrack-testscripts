@@ -1,0 +1,755 @@
+<TestScript xmlns="http://hl7.org/fhir">
+    <id value="FHIREnhancedViewer_SearchParam"/>
+    <url value="https://build.fhir.org/ig/HL7/TestScript-RDSP-Simulator.json"/>
+    <name value="FHIREnhancedViewer_SearchParam"/>
+    <status value="active"/>
+    <date value="2021-08-15"/>
+    <publisher value="HL7 Imaging Integration Workgroup"/>
+    <contact>
+        <name value="HL7 Imaging Integration Workgroup"/>
+        <telecom>
+            <system value="url"/>
+            <value value="http://www.hl7.org/Special/committees/imagemgt/index.cfm"/>
+        </telecom>
+    </contact>
+    <contact>
+        <name value="Abderrazek Boufahja"/>
+        <telecom>
+            <system value="email"/>
+            <value value="abderrazek.boufahja@ge.com"/>
+        </telecom>
+    </contact>
+    <description value="TestScript to simulate a viewer searching and retrieving ImagingStudy resources."/>
+    <copyright value="HL7 2021"/>
+    <origin>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types"/>
+            <code value="FHIR-Client"/>
+            <display value="FHIR Client"/>
+        </profile>
+    </origin>
+    <destination>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-destination-types"/>
+            <code value="FHIR-Server"/>
+            <display value="FHIR Server"/>
+        </profile>
+    </destination>
+    <variable>
+        <name value="imagingStudyResourceId"/>
+		<defaultValue value="example"/>
+        <description value="Enter the ImagingStudy ID"/>
+    </variable>
+	<variable>
+        <name value="dateImagingStudy"/>
+        <path value="ImagingStudy/imagingstudy-started-response"/>
+        <sourceId value="imagingstudy-post-response"/>
+    </variable>
+    <variable>
+        <name value="identifierValue"/>
+        <path value="ImagingStudy/identifier/value"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="identifierSystem"/>
+        <path value="ImagingStudy/identifier/system"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="status"/>
+        <path value="ImagingStudy/status"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="patientDisplay"/>
+        <path value="ImagingStudy/subject/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="referrerDisplay"/>
+        <path value="ImagingStudy/referrer/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="interpreterDisplay"/>
+        <path value="ImagingStudy/interpreter/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="reason"/>
+        <path value="ImagingStudy/reasonCode/coding/code"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="endpointDisplay"/>
+        <path value="ImagingStudy/endpoint/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="encounterDisplay"/>
+        <path value="ImagingStudy/encounter/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="basedonDisplay"/>
+        <path value="ImagingStudy/basedOn/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="bodysite"/>
+        <path value="ImagingStudy/series/bodySite/code"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="dicomclass"/>
+        <path value="ImagingStudy/series/instance/sopClass/code"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="instance"/>
+        <path value="ImagingStudy/series/instance/uid"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="modality"/>
+        <path value="ImagingStudy/series/modality/code"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="series"/>
+        <path value="ImagingStudy/series/uid"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+	<variable>
+        <name value="performerDisplay"/>
+        <path value="ImagingStudy/series/performer/actor/display"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+    <test>
+        <name value="FHIREnhancedViewer"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources and test its search parameters."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Read the ImagingStudy ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${imagingStudyResourceId}"/>
+                <responseId value="imagingstudy-read-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        
+		<!-- test search on basedon -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by basedon"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?basedon=sr1"/> -->
+                <!-- <responseId value="imagingstudy-basedon-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched basedOn."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/basedOn/display"/> -->
+				<!-- <value value="${basedonDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<!-- test search on bodysite -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by bodysite"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?bodysite=${bodysite}"/>
+                <responseId value="imagingstudy-bodysite-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched bodySite."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/bodySite/code"/>
+				<value value="${bodysite}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on dicom-class -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by dicom-class"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?dicom-class=${dicomclass}"/>
+                <responseId value="imagingstudy-dicom-class-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched dicom-class."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/instance[1]/sopClass/code"/>
+				<value value="${dicomclass}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on encounter -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by encounter"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?encounter=enc1"/> -->
+                <!-- <responseId value="imagingstudy-encounter-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched encounter."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/encounter/display"/> -->
+				<!-- <value value="${encounterDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<!-- test search on endpoint -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by endpoint"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?endpoint=endp1"/> -->
+                <!-- <responseId value="imagingstudy-endpoint-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched endpoint."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/endpoint/display"/> -->
+				<!-- <value value="${endpointDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<!-- test search on identifier attribute -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by identifier"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?identifier=${identifierValue}"/>
+                <responseId value="imagingstudy-identifier-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched identifier."/>
+                <direction value="response"/>
+                <resource value="Bundle"/>
+                <!-- TODO check if possible to select and check on id -->
+                <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on identifier attribute with system -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by identifier"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?identifier=${identifierValue}|${identifierSystem}"/>
+                <responseId value="imagingstudy-identifier-system-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched identifier with system."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/identifier[1]/value"/>
+				<value value="${identifierValue}"/>
+                <warningOnly value="true"/>
+            </assert>
+        </action>
+		<!-- test search on instance -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by instance"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?instance=${instance}"/>
+                <responseId value="imagingstudy-instance-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched instance."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/instance[1]/uid"/>
+				<value value="${instance}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on interpreter -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by interpreter"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?interpreter=pract2"/> -->
+                <!-- <responseId value="imagingstudy-interpreter-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched interpreter."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/interpreter/display"/> -->
+				<!-- <value value="${interpreterDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<!-- test search on modality -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by modality"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?modality=${modality}"/>
+                <responseId value="imagingstudy-modality-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched modality."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/modality/code"/>
+				<value value="${modality}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on patient id -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by patient"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?patient=56"/> -->
+                <!-- <responseId value="imagingstudy-patient-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched patient."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/subject/display"/> -->
+				<!-- <value value="${patientDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		
+		<!-- test search on performer -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by performer"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?performer=pract3"/> -->
+                <!-- <responseId value="imagingstudy-performer-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched performer."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/performer[1]/actor/display"/> -->
+				<!-- <value value="${performerDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<!-- test search on reason -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by reason"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?reason=${reason}"/>
+                <responseId value="imagingstudy-reason-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched reason."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/reasonCode/coding/code"/>
+				<value value="${reason}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on referrer -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by referrer"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?referrer=pract1"/> -->
+                <!-- <responseId value="imagingstudy-referrer-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched referrer."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/referrer/display"/> -->
+				<!-- <value value="${referrerDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+		<!-- test search on series -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by series"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?series=${series}"/>
+                <responseId value="imagingstudy-series-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched series."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/uid"/>
+				<value value="${series}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		<!-- test search on started attribute -->
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by date ${dateImagingStudy}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?imagingstudy-started-response=2019-01-23"/>
+                <responseId value="imagingstudy-imagingstudy-started-response-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched started."/>
+                <direction value="response"/>
+                <resource value="Bundle"/>
+                <!-- TODO check if possible to select and check on id -->
+                <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        
+		<!-- test search on status -->
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by status"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?status=${status}"/>
+                <responseId value="imagingstudy-status-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that there are a returned ImagingStudy related to the searched status."/>
+                <direction value="response"/>
+                <operator value="equals"/>  
+                <path value="Bundle/entry[1]/resource/ImagingStudy/status"/>
+				<value value="${status}"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+		
+		
+		<!-- test search on subject id -->
+        <!-- <action> -->
+            <!-- <operation> -->
+                <!-- <type> -->
+                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
+                    <!-- <code value="search"/> -->
+                <!-- </type> -->
+                <!-- <resource value="ImagingStudy"/> -->
+                <!-- <description value="Search the ImagingStudy by subject"/> -->
+                <!-- <accept value="json"/> -->
+                <!-- <encodeRequestUrl value="true"/> -->
+                <!-- <params value="?subject=56"/> -->
+                <!-- <responseId value="imagingstudy-subject-response"/> -->
+            <!-- </operation> -->
+        <!-- </action> -->
+		<!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
+                <!-- <resource value="Bundle"/> -->
+                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+        <!-- <action> -->
+            <!-- <assert> -->
+                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched subject."/> -->
+                <!-- <direction value="response"/> -->
+                <!-- <operator value="equals"/>   -->
+                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/subject/display"/> -->
+				<!-- <value value="${patientDisplay}"/> -->
+                <!-- <warningOnly value="false"/> -->
+            <!-- </assert> -->
+        <!-- </action> -->
+    </test>
+</TestScript>
