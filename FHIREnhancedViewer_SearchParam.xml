@@ -39,12 +39,12 @@
     </destination>
     <variable>
         <name value="imagingStudyResourceId"/>
-		<defaultValue value="example"/>
+		<defaultValue value="example-xr"/>
         <description value="Enter the ImagingStudy ID"/>
     </variable>
 	<variable>
         <name value="dateImagingStudy"/>
-        <path value="ImagingStudy/imagingstudy-started-response"/>
+        <path value="ImagingStudy/started"/>
         <sourceId value="imagingstudy-post-response"/>
     </variable>
     <variable>
@@ -63,18 +63,18 @@
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="patientDisplay"/>
-        <path value="ImagingStudy/subject/display"/>
+        <name value="subjectLink"/>
+        <path value="ImagingStudy/subject/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="referrerDisplay"/>
-        <path value="ImagingStudy/referrer/display"/>
+        <name value="referrerLink"/>
+        <path value="ImagingStudy/referrer/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="interpreterDisplay"/>
-        <path value="ImagingStudy/interpreter/display"/>
+        <name value="interpreterLink"/>
+        <path value="ImagingStudy/interpreter/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
@@ -83,18 +83,18 @@
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="endpointDisplay"/>
-        <path value="ImagingStudy/endpoint/display"/>
+        <name value="endpointLink"/>
+        <path value="ImagingStudy/endpoint/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="encounterDisplay"/>
-        <path value="ImagingStudy/encounter/display"/>
+        <name value="encounterLink"/>
+        <path value="ImagingStudy/encounter/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="basedonDisplay"/>
-        <path value="ImagingStudy/basedOn/display"/>
+        <name value="basedonLink"/>
+        <path value="ImagingStudy/basedOn/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
@@ -123,13 +123,13 @@
         <sourceId value="imagingstudy-read-response"/>
     </variable>
 	<variable>
-        <name value="performerDisplay"/>
-        <path value="ImagingStudy/series/performer/actor/display"/>
+        <name value="performerLink"/>
+        <path value="ImagingStudy/series/performer/actor/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
-        <name value="FHIREnhancedViewer"/>
-        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources and test its search parameters."/>
+        <name value="FHIREnhancedViewer_read"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources through READ operation."/>
         <action>
             <operation>
                 <type>
@@ -153,42 +153,55 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        
-		<!-- test search on basedon -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by basedon"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?basedon=sr1"/> -->
-                <!-- <responseId value="imagingstudy-basedon-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched basedOn."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/basedOn/display"/> -->
-				<!-- <value value="${basedonDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		<!-- test search on bodysite -->
+	</test>
+    <test>
+        <name value="FHIREnhancedViewer_search_basedon"/>
+        <description value="This tests the capacity of a FHIR Server to search by basedon."/>
+		<action>
+			<assert>
+                <description value="Confirm that there are a basedon element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/basedOn/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by basedon link ${basedonLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?basedon=${basedonLink}"/>
+                <responseId value="imagingstudy-basedon-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_bodysite"/>
+        <description value="This tests the capacity of a FHIR Server to search by bodysite."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a series/bodySite/code element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/series/bodySite/code"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -220,8 +233,20 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on dicom-class -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_dicomclass"/>
+        <description value="This tests the capacity of a FHIR Server to search by dicom-class."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a series/instance/sopClass/code element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/series/instance/sopClass/code"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -253,74 +278,90 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on encounter -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by encounter"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?encounter=enc1"/> -->
-                <!-- <responseId value="imagingstudy-encounter-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched encounter."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/encounter/display"/> -->
-				<!-- <value value="${encounterDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		<!-- test search on endpoint -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by endpoint"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?endpoint=endp1"/> -->
-                <!-- <responseId value="imagingstudy-endpoint-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched endpoint."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/endpoint/display"/> -->
-				<!-- <value value="${endpointDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		<!-- test search on identifier attribute -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_encounter"/>
+        <description value="This tests the capacity of a FHIR Server to search by encounter."/>
+		<action>
+			<assert>
+                <description value="Confirm that there are a encounter element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/encounter/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
         <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by encounter ${encounterLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?encounter=${encounterLink}"/>
+                <responseId value="imagingstudy-encounter-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_endpoint"/>
+        <description value="This tests the capacity of a FHIR Server to search by endpoint."/>
+          <action>
+			<assert>
+                <description value="Confirm that there are a endpoint element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/endpoint/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		  <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by endpoint ${endpointLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?endpoint=${endpointLink}"/>
+                <responseId value="imagingstudy-endpoint-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_identifier"/>
+        <description value="This tests the capacity of a FHIR Server to search by identifier."/>
+        <action>
+			<assert>
+                <description value="Confirm that there are a identifier element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/identifier/value"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -352,8 +393,20 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on identifier attribute with system -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_identifier_sys"/>
+        <description value="This tests the capacity of a FHIR Server to search by identifier attribute with system."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a identifier element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/identifier/system"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -382,11 +435,23 @@
                 <operator value="equals"/>  
                 <path value="Bundle/entry[1]/resource/ImagingStudy/identifier[1]/value"/>
 				<value value="${identifierValue}"/>
-                <warningOnly value="true"/>
+                <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on instance -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_instance"/>
+        <description value="This tests the capacity of a FHIR Server to search by instance."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a instance uid element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/series/instance/uid"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -418,41 +483,55 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on interpreter -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by interpreter"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?interpreter=pract2"/> -->
-                <!-- <responseId value="imagingstudy-interpreter-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched interpreter."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/interpreter/display"/> -->
-				<!-- <value value="${interpreterDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		<!-- test search on modality -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_interpreter"/>
+        <description value="This tests the capacity of a FHIR Server to search by interpreter."/>
         <action>
+			<assert>
+                <description value="Confirm that there are an interpreter element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/interpreter/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by interpreter ${interpreterLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?interpreter=${interpreterLink}"/>
+                <responseId value="imagingstudy-interpreter-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_modality"/>
+        <description value="This tests the capacity of a FHIR Server to search by modality."/>
+        <action>
+			<assert>
+                <description value="Confirm that there are a modality element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/series/modality/code"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -484,75 +563,90 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on patient id -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by patient"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?patient=56"/> -->
-                <!-- <responseId value="imagingstudy-patient-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched patient."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/subject/display"/> -->
-				<!-- <value value="${patientDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		
-		<!-- test search on performer -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by performer"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?performer=pract3"/> -->
-                <!-- <responseId value="imagingstudy-performer-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched performer."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/performer[1]/actor/display"/> -->
-				<!-- <value value="${performerDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		<!-- test search on reason -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_patient"/>
+        <description value="This tests the capacity of a FHIR Server to search by patient."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a subject element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/subject/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by patient ${subjectLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?patient=${subjectLink}"/>
+                <responseId value="imagingstudy-patient-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_performer"/>
+        <description value="This tests the capacity of a FHIR Server to search by performer."/>
+        <action>
+			<assert>
+                <description value="Confirm that there are a performer element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/series/performer/actor/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by performer ${performerLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?performer=${performerLink}"/>
+                <responseId value="imagingstudy-performer-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_reason"/>
+        <description value="This tests the capacity of a FHIR Server to search by reason."/>
+        <action>
+			<assert>
+                <description value="Confirm that there are a reasonCode element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/reasonCode/coding/code"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -584,41 +678,55 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on referrer -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by referrer"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?referrer=pract1"/> -->
-                <!-- <responseId value="imagingstudy-referrer-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched referrer."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/referrer/display"/> -->
-				<!-- <value value="${referrerDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-		<!-- test search on series -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_referrer"/>
+        <description value="This tests the capacity of a FHIR Server to search by referrer."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a referrer element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/reasonCode/coding/code"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by referrer ${referrerLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?referrer=${referrerLink}"/>
+                <responseId value="imagingstudy-referrer-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_series"/>
+        <description value="This tests the capacity of a FHIR Server to search by series."/>
+        <action>
+			<assert>
+                <description value="Confirm that there are a series element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/series/uid"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -650,7 +758,19 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on started attribute -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_started"/>
+        <description value="This tests the capacity of a FHIR Server to search by started attribute."/>
+		<action>
+			<assert>
+                <description value="Confirm that there are a started element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/started"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
 		<action>
             <operation>
                 <type>
@@ -661,8 +781,8 @@
                 <description value="Search the ImagingStudy by date ${dateImagingStudy}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-                <params value="?imagingstudy-started-response=2019-01-23"/>
-                <responseId value="imagingstudy-imagingstudy-started-response-response"/>
+                <params value="?started=${dateImagingStudy}"/>
+                <responseId value="imagingstudy-started-response"/>
             </operation>
         </action>
         <action>
@@ -682,9 +802,20 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        
-		<!-- test search on status -->
+ 	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_status"/>
+        <description value="This tests the capacity of a FHIR Server to search by status."/>       
         <action>
+			<assert>
+                <description value="Confirm that there are a status element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/status"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -717,39 +848,40 @@
             </assert>
         </action>
 		
-		
-		<!-- test search on subject id -->
-        <!-- <action> -->
-            <!-- <operation> -->
-                <!-- <type> -->
-                    <!-- <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/> -->
-                    <!-- <code value="search"/> -->
-                <!-- </type> -->
-                <!-- <resource value="ImagingStudy"/> -->
-                <!-- <description value="Search the ImagingStudy by subject"/> -->
-                <!-- <accept value="json"/> -->
-                <!-- <encodeRequestUrl value="true"/> -->
-                <!-- <params value="?subject=56"/> -->
-                <!-- <responseId value="imagingstudy-subject-response"/> -->
-            <!-- </operation> -->
-        <!-- </action> -->
-		<!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the total number of response is greater than 1."/> -->
-                <!-- <resource value="Bundle"/> -->
-                <!-- <expression value="Bundle.total.toInteger() &gt;= 1"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that there are a returned ImagingStudy related to the searched subject."/> -->
-                <!-- <direction value="response"/> -->
-                <!-- <operator value="equals"/>   -->
-                <!-- <path value="Bundle/entry[1]/resource/ImagingStudy/subject/display"/> -->
-				<!-- <value value="${patientDisplay}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
+	</test>
+	<test>
+        <name value="FHIREnhancedViewer_search_subject"/>
+        <description value="This tests the capacity of a FHIR Server to search by subject id."/>       
+        <action>
+			<assert>
+                <description value="Confirm that there are a subject element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/subject/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Search the ImagingStudy by subject ${subjectLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?subject=${subjectLink}"/>
+                <responseId value="imagingstudy-subject-response"/>
+            </operation>
+        </action>
+		<action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <resource value="Bundle"/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
     </test>
 </TestScript>

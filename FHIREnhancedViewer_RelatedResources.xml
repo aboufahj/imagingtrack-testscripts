@@ -107,14 +107,15 @@
 	<test>	
 		<name value="FHIREnhancedViewer_TestSubjectLink"/>
         <description value="This tests the capacity of a FHIR Server to share subject resource."/>
-		<!-- TODO check how to make this action possible -->
-        <!-- <action> -->
-            <!-- <assert> -->
-                <!-- <description value="Confirm that the returned HTTP status is 200(OK)."/> -->
-                <!-- <expression value="${subjectLink}"/> -->
-                <!-- <warningOnly value="false"/> -->
-            <!-- </assert> -->
-        <!-- </action> -->
+        <action>
+			<assert>
+                <description value="Confirm that there are a subject element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/subject/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
 		<action>
             <operation>
                 <type>
@@ -142,6 +143,15 @@
 		<name value="FHIREnhancedViewer_TestEncounterLink"/>
         <description value="This tests the capacity of a FHIR Server to share encounter resource."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a encounter element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/encounter/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -168,6 +178,15 @@
 		<name value="FHIREnhancedViewer_TestBasedonLink"/>
         <description value="This tests the capacity of a FHIR Server to share basedon resource."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a basedOn element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/basedOn/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -194,6 +213,15 @@
 		<name value="FHIREnhancedViewer_TestReferrerLink"/>
         <description value="This tests the capacity of a FHIR Server to share referrer resource."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a referrer element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/referrer/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -220,6 +248,15 @@
 		<name value="FHIREnhancedViewer_TestInterpreterLink"/>
         <description value="This tests the capacity of a FHIR Server to share interpreter resource."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a interpreter element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/interpreter/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -246,6 +283,15 @@
 		<name value="FHIREnhancedViewer_TestProcedureLink"/>
         <description value="This tests the capacity of a FHIR Server to share procedure resource."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a procedureReference element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/procedureReference/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -272,6 +318,15 @@
 		<name value="FHIREnhancedViewer_TestReasonReferenceLink"/>
         <description value="This tests the capacity of a FHIR Server to share reasonReference resource."/>
         <action>
+			<assert>
+                <description value="Confirm that there are a reasonReference element."/>
+                <sourceId value="imagingstudy-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="ImagingStudy/reasonReference/reference"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>

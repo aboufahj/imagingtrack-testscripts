@@ -47,9 +47,20 @@
         <path value="ImagingStudy/endpoint/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
+	<variable>
+        <name value="wadoUrl"/>
+        <path value="Endpoint/address" />
+        <sourceId value="endpoint-read-response"/>
+    </variable>
+	<!-- TODO fix when there are multi Uid -->
+	<variable>
+        <name value="studyUid"/>
+        <path value="ImagingStudy/identifier/value" />
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
     <test>
-        <name value="FHIREnhancedViewer_EndpointAccess"/>
-        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources and test access to Endpoint resource."/>
+        <name value="FHIREnhancedViewer_ImagingStudy"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resource."/>
         <action>
             <operation>
                 <type>
@@ -73,7 +84,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        
+    </test>
+	<test>
+        <name value="FHIREnhancedViewer_Endpoint"/>
+        <description value="This tests the capacity of a FHIR Server to share Endpoint resource."/>
 		<action>
             <operation>
                 <type>
@@ -96,6 +110,38 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		
+		<action>
+			<assert>
+                <description value="Confirm that there are a address element."/>
+                <sourceId value="endpoint-read-response"/>
+                <operator value="notEmpty"/>  
+                <path value="Endpoint/address"/>
+                <warningOnly value="false"/>
+            </assert>
+		</action>
+    </test>
+	<test>
+        <name value="FHIREnhancedViewer_WADO"/>
+        <description value="This tests the capacity of a DICOM server to retrieve the study via WADO RS."/>
+		<action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <description value="Read the WADO study resource"/>
+                <responseId value="wado-read-response"/>
+				<url value="${endpointId}/studies/${studyUid}"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
     </test>
 </TestScript>

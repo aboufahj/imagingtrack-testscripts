@@ -1,0 +1,42 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+ArrowColor #005500
+LifeLineBorderColor Black
+ActorFontColor Black
+ActorBorderColor Black
+ParticipantBorderColor Black
+ParticipantBackgroundColor #c9f4ff
+ActorBackgroundColor #c9f4ff
+}
+
+participant "Viewer" as viewer
+participant "FHIR Server" as server
+participant "PACS" as pacs
+
+group FHIR
+  viewer -> server : FHIR GET ImagingStudy resource
+  activate server #b3ffd7
+  server  -> viewer : Return ImagingStudy resource
+  deactivate server
+  viewer -> viewer : Check return code 200
+end
+
+group FHIR
+  viewer -> server : FHIR GET Endpoint resource
+  activate server #b3ffd7
+  server  -> viewer: Return Endpoint resource
+  deactivate server
+  viewer -> viewer : Check return code 200
+  viewer -> viewer : Check Endpoint/address notEmpty
+end
+
+group DICOMWeb
+  viewer -> pacs : WADO GET study DICOM objects binary
+  activate pacs #b3ffd7
+  pacs -> viewer: Return 
+  deactivate pacs
+  viewer -> viewer : Check return code 200
+end
+@enduml

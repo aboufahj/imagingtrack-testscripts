@@ -135,9 +135,10 @@
         <sourceId value="imagingstudy-post-json"/>
     </variable>
     <test>
-        <name value="StudyContentNotification"/>
+        <name value="StudyContentNotification_POST"/>
         <description value="This tests the capacity of a FHIR Server to accept ImagingStudy resources."/>
-        <action>
+        <!-- POST an imagingStudy -->
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -169,6 +170,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
+	</test>
+	<test>
+		<name value="StudyContentNotification_READ"/>
+        <description value="Read the posted imaging study"/>
         <action>
             <operation>
                 <type>
@@ -192,8 +197,11 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        <!-- test search on basedon -->
-        <action>
+	</test>
+	<test>
+        <name value="StudyContentNotification_SEARCH_basedon"/>
+        <description value="test search on basedon"/>
+		<action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -226,7 +234,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on bodysite -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_bodysite"/>
+        <description value="test search on bodysite"/>
         <action>
             <operation>
                 <type>
@@ -259,7 +270,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on dicom-class -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_dicomclass"/>
+        <description value="test search on dicom-class"/>
         <action>
             <operation>
                 <type>
@@ -292,7 +306,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on encounter -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_encounter"/>
+        <description value="test search on encounter"/>
         <action>
             <operation>
                 <type>
@@ -326,7 +343,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on endpoint -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_endpoint"/>
+        <description value="test search on endpoint"/>
         <action>
             <operation>
                 <type>
@@ -360,7 +380,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on identifier attribute -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_identifier"/>
+        <description value="test search on identifier attribute"/>
         <action>
             <operation>
                 <type>
@@ -393,7 +416,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on identifier attribute with system -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_identifier_system"/>
+        <description value="test search on identifier attribute with system"/>
         <action>
             <operation>
                 <type>
@@ -423,10 +449,13 @@
                 <operator value="equals"/>  
                 <path value="Bundle/entry[1]/resource/ImagingStudy/identifier[1]/value"/>
 				<value value="${identifierValue}"/>
-                <warningOnly value="true"/>
+                <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on instance -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_instance"/>
+        <description value="test search on instance"/>
         <action>
             <operation>
                 <type>
@@ -459,7 +488,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on interpreter -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_interpreter"/>
+        <description value="test search on interpreter"/>
         <action>
             <operation>
                 <type>
@@ -493,7 +525,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on modality -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_modality"/>
+        <description value="test search on modality"/>
         <action>
             <operation>
                 <type>
@@ -526,7 +561,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on patient id -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_patient"/>
+        <description value="test search on patient id"/>
         <action>
             <operation>
                 <type>
@@ -560,8 +598,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		
-		<!-- test search on performer -->
+	</test>
+	<test>		
+		<name value="StudyContentNotification_SEARCH_performer"/>
+        <description value="test search on performer"/>
         <action>
             <operation>
                 <type>
@@ -595,7 +635,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on reason -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_reason"/>
+        <description value="test search on reason"/>
         <action>
             <operation>
                 <type>
@@ -628,7 +671,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on referrer -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_referrer"/>
+        <description value="test search on referrer"/>
         <action>
             <operation>
                 <type>
@@ -662,7 +708,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on series -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_series"/>
+        <description value="test search on series"/>
         <action>
             <operation>
                 <type>
@@ -695,7 +744,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		<!-- test search on started attribute -->
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_started"/>
+        <description value="test search on started attribute"/>
 		<action>
             <operation>
                 <type>
@@ -727,8 +779,10 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        
-		<!-- test search on status -->
+	</test>
+	<test>        
+		<name value="StudyContentNotification_SEARCH_status"/>
+        <description value="test search on status"/>
         <action>
             <operation>
                 <type>
@@ -760,10 +814,11 @@
 				<value value="${status}"/>
                 <warningOnly value="false"/>
             </assert>
-        </action>
-		
-		
-		<!-- test search on subject id -->
+        </action>		
+	</test>
+	<test>
+		<name value="StudyContentNotification_SEARCH_subject"/>
+        <description value="test search on subject id"/>
         <action>
             <operation>
                 <type>
@@ -797,6 +852,20 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-		
     </test>
+	<teardown>
+		<action>
+			 <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="delete"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Relete the ImagingStudy ${idImagingStudy}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${idImagingStudy}"/>
+            </operation>
+		</action>
+	</teardown>
 </TestScript>

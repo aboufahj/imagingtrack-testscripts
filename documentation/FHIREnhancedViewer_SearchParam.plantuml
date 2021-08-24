@@ -1,0 +1,184 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+ArrowColor #005500
+LifeLineBorderColor Black
+ActorFontColor Black
+ActorBorderColor Black
+ParticipantBorderColor Black
+ParticipantBackgroundColor #c9f4ff
+ActorBackgroundColor #c9f4ff
+}
+
+actor "Tester" as tester
+participant "Viewer Script" as viewer
+participant "FHIR Server" as server
+
+tester -> viewer : Provide ImagingStudy ID
+
+group read
+  viewer -> server : FHIR GET ImagingStudy resource
+  activate server #b3ffd7
+  server  -> viewer: Return ImagingStudy resource
+  deactivate server
+end
+
+group search_basedon
+  viewer -> server : FHIR SEARCH ImagingStudy by basedon attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_bodysite
+  viewer -> server : FHIR SEARCH ImagingStudy by bodysite attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+
+  viewer -> viewer : check Bundle.ImagingStudy has the same bodysite
+end
+
+group search_dicomclass
+  viewer -> server : FHIR SEARCH ImagingStudy by dicom-class attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+
+  viewer -> viewer : check Bundle.ImagingStudy has the same dicom-class
+end
+
+group search_encounter
+  viewer -> server : FHIR SEARCH ImagingStudy by encounter attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_endpoint
+  viewer -> server : FHIR SEARCH ImagingStudy by endpoint attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_identifier
+  viewer -> server : FHIR SEARCH ImagingStudy by identifier attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_identifier_sys
+  viewer -> server : FHIR SEARCH ImagingStudy by identifier and system attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_instance
+  viewer -> server : FHIR SEARCH ImagingStudy by instance attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+  viewer -> viewer : check Bundle.ImagingStudy has the same instance/uid
+end
+
+
+group search_interpreter
+  viewer -> server : FHIR SEARCH ImagingStudy by interpreter attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_modality
+  viewer -> server : FHIR SEARCH ImagingStudy by modality attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+  viewer -> viewer : check Bundle.ImagingStudy has the same series/modality
+end
+
+group search_patient
+  viewer -> server : FHIR SEARCH ImagingStudy by patient attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_performer
+  viewer -> server : FHIR SEARCH ImagingStudy by performer attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_reason
+  viewer -> server : FHIR SEARCH ImagingStudy by reason attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+  viewer -> viewer : check Bundle.ImagingStudy has the same reasonCode
+end
+
+group search_referrer
+  viewer -> server : FHIR SEARCH ImagingStudy by referrer attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_series
+  viewer -> server : FHIR SEARCH ImagingStudy by series attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+  viewer -> viewer : check Bundle.ImagingStudy has the same series/uid
+end
+
+group search_started
+  viewer -> server : FHIR SEARCH ImagingStudy by started attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+  viewer -> viewer : check Bundle.ImagingStudy has the same started
+end
+
+group search_status
+  viewer -> server : FHIR SEARCH ImagingStudy by status attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+  viewer -> viewer : check Bundle.ImagingStudy has the same status
+end
+
+group search_subject
+  viewer -> server : FHIR SEARCH ImagingStudy by subject attribute
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ImagingStudy resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+@enduml

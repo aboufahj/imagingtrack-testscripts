@@ -1,0 +1,83 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+ArrowColor #005500
+LifeLineBorderColor Black
+ActorFontColor Black
+ActorBorderColor Black
+ParticipantBorderColor Black
+ParticipantBackgroundColor #c9f4ff
+ActorBackgroundColor #c9f4ff
+}
+
+actor "Tester" as tester
+participant "Viewer Script" as viewer
+participant "FHIR Server" as server
+
+tester -> viewer : Provide ImagingStudy ID
+
+group read
+  viewer -> server : FHIR GET ImagingStudy resource
+  activate server #b3ffd7
+  server  -> viewer: Return ImagingStudy resource
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_subject
+  viewer -> server : FHIR READ ImagingStudy.subject
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by subject attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_encounter
+  viewer -> server : FHIR READ ImagingStudy.encounter
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by encounter attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_basedon
+  viewer -> server : FHIR READ ImagingStudy.basedon
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by basedon attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_referrer
+  viewer -> server : FHIR READ ImagingStudy.referrer
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by referrer attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_interpreter
+  viewer -> server : FHIR READ ImagingStudy.interpreter
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by interpreter attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_procedureReference
+  viewer -> server : FHIR READ ImagingStudy.procedureReference
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by procedureReference attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+
+group read_reasonReference
+  viewer -> server : FHIR READ ImagingStudy.reasonReference
+  activate server #b3ffd7
+  server  -> viewer: Return referenced resource by reasonReference attribute
+  deactivate server
+  viewer -> viewer : check return code is 200
+end
+@enduml
