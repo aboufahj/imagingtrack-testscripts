@@ -1,0 +1,58 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+  ArrowColor #005500
+  LifeLineBorderColor Black
+  ActorFontColor Black
+  ActorBorderColor Black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor #c9f4ff
+  ActorBackgroundColor #c9f4ff
+}
+
+participant "RDSP Simulator Script" as rdsp
+participant "FHIR Server" as server
+
+rdsp -> rdsp : Configure a Bundle of resources (ImagingStudy + Obsevation + Practitioner + Patient) as fixture
+
+group create
+  rdsp -> server: FHIR POST Bundle fixture
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle updated resource
+  deactivate server
+  rdsp -> rdsp : check return code is 201
+  rdsp -> rdsp : check response contains Bundle
+end
+
+group read
+  rdsp  -> server : FHIR GET Observation returned from POST
+  activate server #b3ffd7
+  server  -> rdsp : Return Observation resource
+  deactivate server
+  rdsp  -> rdsp  : check return code is 200
+end
+
+
+group delete
+  rdsp-> server : FHIR DELETE ImagingStudy
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+
+  rdsp-> server : FHIR DELETE Observation
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+
+  rdsp-> server : FHIR DELETE Patient
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+
+  rdsp-> server : FHIR DELETE Practitioner
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+end
+@enduml

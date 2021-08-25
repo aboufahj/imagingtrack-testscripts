@@ -1,0 +1,109 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+ArrowColor #005500
+LifeLineBorderColor Black
+ActorFontColor Black
+ActorBorderColor Black
+ParticipantBorderColor Black
+ParticipantBackgroundColor #c9f4ff
+ActorBackgroundColor #c9f4ff
+}
+
+participant "Tester" as tester
+participant "RDSC Simulator Script" as rdsp
+participant "FHIR Server" as server
+
+tester -> rdsp : Provide Radiation Dose Summary Observation ID
+
+group read RDS
+  rdsp -> server : FHIR GET Observation resource
+  activate server #b3ffd7
+  server  -> rdsp : Return Observation resource
+  deactivate server
+  rdsp -> rdsp : Check return code is 200
+  rdsp -> rdsp : Check Observation/id not empty
+end
+
+group search_patient
+  rdsp -> server : FHIR SEARCH RadiationDoseSummary by patient attribute
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle of Observation resources
+  deactivate server
+
+  rdsp -> rdsp : check Bundle.total > 0
+end
+
+group search_device
+  rdsp -> server : FHIR SEARCH RadiationDoseSummary by device attribute
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle of Observation resources
+  deactivate server
+
+  rdsp -> rdsp : check Bundle.total > 0
+end
+
+group search_partof
+  rdsp -> server : FHIR SEARCH RadiationDoseSummary by part-of attribute
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle of Observation resources
+  deactivate server
+
+  rdsp  -> rdsp  : check Bundle.total > 0
+end
+
+group search_identifier
+  rdsp -> server : FHIR SEARCH RadiationDoseSummary by identifier attribute
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle of Observation resources
+  deactivate server
+
+  rdsp -> rdsp : check Bundle.total > 0
+end
+
+group search_date
+  rdsp -> server : FHIR SEARCH RadiationDoseSummary by date attribute
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle of Observation resources
+  deactivate server
+
+  rdsp -> rdsp : check Bundle.total > 0
+end
+
+group read Patient
+  rdsp -> server : FHIR GET Patient resource
+  activate server #b3ffd7
+  server  -> rdsp : Return Patient resource
+  deactivate server
+  rdsp -> rdsp : Check return code is 200
+  rdsp -> rdsp : Check Patient/id not empty
+end
+
+group read Device
+  rdsp -> server : FHIR GET Device resource
+  activate server #b3ffd7
+  server  -> rdsp : Return Device resource
+  deactivate server
+  rdsp -> rdsp : Check return code is 200
+  rdsp -> rdsp : Check Device/id not empty
+end
+
+group read Practitioner
+  rdsp -> server : FHIR GET Practitioner resource
+  activate server #b3ffd7
+  server  -> rdsp : Return Practitioner resource
+  deactivate server
+  rdsp -> rdsp : Check return code is 200
+  rdsp -> rdsp : Check Practitioner/id not empty
+end
+
+group read ImagingStudy
+  rdsp -> server : FHIR GET ImagingStudy resource
+  activate server #b3ffd7
+  server  -> rdsp : Return ImagingStudy resource
+  deactivate server
+  rdsp -> rdsp : Check return code is 200
+  rdsp -> rdsp : Check ImagingStudy/id not empty
+end
+@enduml

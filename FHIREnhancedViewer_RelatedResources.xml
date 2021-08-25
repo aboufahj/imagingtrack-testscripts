@@ -39,40 +39,40 @@
     </destination>
     <variable>
         <name value="imagingStudyResourceId"/>
-		<defaultValue value="example-xr"/>
+        <defaultValue value="example-xr"/>
         <description value="Enter the ImagingStudy ID"/>
     </variable>
-	<variable>
+    <variable>
         <name value="subjectLink"/>
         <path value="ImagingStudy/subject/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
-	<variable>
+    <variable>
         <name value="encounterLink"/>
         <path value="ImagingStudy/encounter/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
-	<variable>
+    <variable>
         <name value="basedonLink"/>
         <path value="ImagingStudy/basedOn/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
-	<variable>
+    <variable>
         <name value="referrerLink"/>
         <path value="ImagingStudy/referrer/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
-	<variable>
+    <variable>
         <name value="interpreterLink"/>
         <path value="ImagingStudy/interpreter/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
-	<variable>
+    <variable>
         <name value="procedureLink"/>
         <path value="ImagingStudy/procedureReference/reference" />
         <sourceId value="imagingstudy-read-response"/>
     </variable>
-	<variable>
+    <variable>
         <name value="reasonReferenceLink"/>
         <path value="ImagingStudy/reasonReference/reference" />
         <sourceId value="imagingstudy-read-response"/>
@@ -103,20 +103,20 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestSubjectLink"/>
+    </test>
+    <test>
+        <name value="FHIREnhancedViewer_TestSubjectLink"/>
         <description value="This tests the capacity of a FHIR Server to share subject resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a subject element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/subject/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -126,7 +126,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="subject-read-response"/>
-				<url value="${subjectLink}"/>
+                <url value="${subjectLink}"/>
             </operation>
         </action>
         <action>
@@ -139,19 +139,19 @@
             </assert>
         </action>
     </test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestEncounterLink"/>
+    <test>
+        <name value="FHIREnhancedViewer_TestEncounterLink"/>
         <description value="This tests the capacity of a FHIR Server to share encounter resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a encounter element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/encounter/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -161,7 +161,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="encounter-read-response"/>
-				<url value="${encounterLink}"/>
+                <url value="${encounterLink}"/>
             </operation>
         </action>
         <action>
@@ -174,19 +174,19 @@
             </assert>
         </action>
     </test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestBasedonLink"/>
+    <test>
+        <name value="FHIREnhancedViewer_TestBasedonLink"/>
         <description value="This tests the capacity of a FHIR Server to share basedon resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a basedOn element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/basedOn/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -196,7 +196,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="basedon-read-response"/>
-				<url value="${basedonLink}"/>
+                <url value="${basedonLink}"/>
             </operation>
         </action>
         <action>
@@ -209,19 +209,19 @@
             </assert>
         </action>
     </test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestReferrerLink"/>
+    <test>
+        <name value="FHIREnhancedViewer_TestReferrerLink"/>
         <description value="This tests the capacity of a FHIR Server to share referrer resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a referrer element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/referrer/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -231,7 +231,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="encounter-read-response"/>
-				<url value="${referrerLink}"/>
+                <url value="${referrerLink}"/>
             </operation>
         </action>
         <action>
@@ -244,19 +244,19 @@
             </assert>
         </action>
     </test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestInterpreterLink"/>
+    <test>
+        <name value="FHIREnhancedViewer_TestInterpreterLink"/>
         <description value="This tests the capacity of a FHIR Server to share interpreter resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a interpreter element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/interpreter/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -266,7 +266,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="interpreter-read-response"/>
-				<url value="${interpreterLink}"/>
+                <url value="${interpreterLink}"/>
             </operation>
         </action>
         <action>
@@ -279,19 +279,19 @@
             </assert>
         </action>
     </test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestProcedureLink"/>
+    <test>
+        <name value="FHIREnhancedViewer_TestProcedureLink"/>
         <description value="This tests the capacity of a FHIR Server to share procedure resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a procedureReference element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/procedureReference/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -301,7 +301,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="procedure-read-response"/>
-				<url value="${procedureLink}"/>
+                <url value="${procedureLink}"/>
             </operation>
         </action>
         <action>
@@ -314,19 +314,19 @@
             </assert>
         </action>
     </test>
-	<test>	
-		<name value="FHIREnhancedViewer_TestReasonReferenceLink"/>
+    <test>
+        <name value="FHIREnhancedViewer_TestReasonReferenceLink"/>
         <description value="This tests the capacity of a FHIR Server to share reasonReference resource."/>
         <action>
-			<assert>
+            <assert>
                 <description value="Confirm that there are a reasonReference element."/>
                 <sourceId value="imagingstudy-read-response"/>
-                <operator value="notEmpty"/>  
+                <operator value="notEmpty"/>
                 <path value="ImagingStudy/reasonReference/reference"/>
                 <warningOnly value="false"/>
             </assert>
-		</action>
-		<action>
+        </action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -336,7 +336,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="reason-reference-read-response"/>
-				<url value="${reasonReferenceLink}"/>
+                <url value="${reasonReferenceLink}"/>
             </operation>
         </action>
         <action>
@@ -348,5 +348,5 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-    </test>	
+    </test>
 </TestScript>

@@ -59,77 +59,77 @@
         <path value="ImagingStudy/identifier/value"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="identifierSystem"/>
         <path value="ImagingStudy/identifier/system"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="status"/>
         <path value="ImagingStudy/status"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="patientDisplay"/>
         <path value="ImagingStudy/subject/display"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="referrerDisplay"/>
         <path value="ImagingStudy/referrer/display"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="interpreterDisplay"/>
         <path value="ImagingStudy/interpreter/display"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="reason"/>
         <path value="ImagingStudy/reasonCode/coding/code"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="endpointDisplay"/>
         <path value="ImagingStudy/endpoint/display"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="encounterDisplay"/>
         <path value="ImagingStudy/encounter/display"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="basedonDisplay"/>
         <path value="ImagingStudy/basedOn/display"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="bodysite"/>
         <path value="ImagingStudy/series/bodySite/code"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="dicomclass"/>
         <path value="ImagingStudy/series/instance/sopClass/code"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="instance"/>
         <path value="ImagingStudy/series/instance/uid"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="modality"/>
         <path value="ImagingStudy/series/modality/code"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="series"/>
         <path value="ImagingStudy/series/uid"/>
         <sourceId value="imagingstudy-post-json"/>
     </variable>
-	<variable>
+    <variable>
         <name value="performerDisplay"/>
         <path value="ImagingStudy/series/performer/actor/display"/>
         <sourceId value="imagingstudy-post-json"/>
@@ -138,7 +138,7 @@
         <name value="StudyContentNotification_POST"/>
         <description value="This tests the capacity of a FHIR Server to accept ImagingStudy resources."/>
         <!-- POST an imagingStudy -->
-		<action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -170,9 +170,9 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_READ"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_READ"/>
         <description value="Read the posted imaging study"/>
         <action>
             <operation>
@@ -197,11 +197,11 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
+    </test>
+    <test>
         <name value="StudyContentNotification_SEARCH_basedon"/>
         <description value="test search on basedon"/>
-		<action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -211,12 +211,12 @@
                 <description value="Search the ImagingStudy by basedon"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO find how to calculate sr1 -->
+                <!-- TODO find how to calculate sr1 -->
                 <params value="?basedon=sr1"/>
                 <responseId value="imagingstudy-basedon-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -228,15 +228,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched basedOn."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/basedOn/display"/>
-				<value value="${basedonDisplay}"/>
+                <value value="${basedonDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_bodysite"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_bodysite"/>
         <description value="test search on bodysite"/>
         <action>
             <operation>
@@ -252,7 +252,7 @@
                 <responseId value="imagingstudy-bodysite-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -264,15 +264,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched bodySite."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/bodySite/code"/>
-				<value value="${bodysite}"/>
+                <value value="${bodysite}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_dicomclass"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_dicomclass"/>
         <description value="test search on dicom-class"/>
         <action>
             <operation>
@@ -288,7 +288,7 @@
                 <responseId value="imagingstudy-dicom-class-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -300,15 +300,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched dicom-class."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/instance[1]/sopClass/code"/>
-				<value value="${dicomclass}"/>
+                <value value="${dicomclass}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_encounter"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_encounter"/>
         <description value="test search on encounter"/>
         <action>
             <operation>
@@ -320,12 +320,12 @@
                 <description value="Search the ImagingStudy by encounter"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO find how to calculate enc1 -->
+                <!-- TODO find how to calculate enc1 -->
                 <params value="?encounter=enc1"/>
                 <responseId value="imagingstudy-encounter-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -337,15 +337,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched encounter."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/encounter/display"/>
-				<value value="${encounterDisplay}"/>
+                <value value="${encounterDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_endpoint"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_endpoint"/>
         <description value="test search on endpoint"/>
         <action>
             <operation>
@@ -357,12 +357,12 @@
                 <description value="Search the ImagingStudy by endpoint"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO find how to calculate endp1 -->
+                <!-- TODO find how to calculate endp1 -->
                 <params value="?endpoint=endp1"/>
                 <responseId value="imagingstudy-endpoint-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -374,15 +374,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched endpoint."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/endpoint/display"/>
-				<value value="${endpointDisplay}"/>
+                <value value="${endpointDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_identifier"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_identifier"/>
         <description value="test search on identifier attribute"/>
         <action>
             <operation>
@@ -398,7 +398,7 @@
                 <responseId value="imagingstudy-identifier-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -416,9 +416,9 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_identifier_system"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_identifier_system"/>
         <description value="test search on identifier attribute with system"/>
         <action>
             <operation>
@@ -434,7 +434,7 @@
                 <responseId value="imagingstudy-identifier-system-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -446,15 +446,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched identifier with system."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/identifier[1]/value"/>
-				<value value="${identifierValue}"/>
+                <value value="${identifierValue}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_instance"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_instance"/>
         <description value="test search on instance"/>
         <action>
             <operation>
@@ -470,7 +470,7 @@
                 <responseId value="imagingstudy-instance-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -482,15 +482,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched instance."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/instance[1]/uid"/>
-				<value value="${instance}"/>
+                <value value="${instance}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_interpreter"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_interpreter"/>
         <description value="test search on interpreter"/>
         <action>
             <operation>
@@ -502,12 +502,12 @@
                 <description value="Search the ImagingStudy by interpreter"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO find how to calculate pract2 -->
+                <!-- TODO find how to calculate pract2 -->
                 <params value="?interpreter=pract2"/>
                 <responseId value="imagingstudy-interpreter-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -519,15 +519,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched interpreter."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/interpreter/display"/>
-				<value value="${interpreterDisplay}"/>
+                <value value="${interpreterDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_modality"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_modality"/>
         <description value="test search on modality"/>
         <action>
             <operation>
@@ -543,7 +543,7 @@
                 <responseId value="imagingstudy-modality-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -555,15 +555,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched modality."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/modality/code"/>
-				<value value="${modality}"/>
+                <value value="${modality}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_patient"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_patient"/>
         <description value="test search on patient id"/>
         <action>
             <operation>
@@ -575,12 +575,12 @@
                 <description value="Search the ImagingStudy by patient"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO check if we can have a variable to get the patient id 56 instead of writing it directly -->
+                <!-- TODO check if we can have a variable to get the patient id 56 instead of writing it directly -->
                 <params value="?patient=56"/>
                 <responseId value="imagingstudy-patient-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -592,15 +592,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched patient."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/subject/display"/>
-				<value value="${patientDisplay}"/>
+                <value value="${patientDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>		
-		<name value="StudyContentNotification_SEARCH_performer"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_performer"/>
         <description value="test search on performer"/>
         <action>
             <operation>
@@ -612,12 +612,12 @@
                 <description value="Search the ImagingStudy by performer"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO check if we can have a variable to get the performer id pract3 instead of writing it directly -->
+                <!-- TODO check if we can have a variable to get the performer id pract3 instead of writing it directly -->
                 <params value="?performer=pract3"/>
                 <responseId value="imagingstudy-performer-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -629,15 +629,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched performer."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/performer[1]/actor/display"/>
-				<value value="${performerDisplay}"/>
+                <value value="${performerDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_reason"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_reason"/>
         <description value="test search on reason"/>
         <action>
             <operation>
@@ -653,7 +653,7 @@
                 <responseId value="imagingstudy-reason-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -665,15 +665,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched reason."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/reasonCode/coding/code"/>
-				<value value="${reason}"/>
+                <value value="${reason}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_referrer"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_referrer"/>
         <description value="test search on referrer"/>
         <action>
             <operation>
@@ -685,12 +685,12 @@
                 <description value="Search the ImagingStudy by referrer"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO find how to calculate pract1 -->
+                <!-- TODO find how to calculate pract1 -->
                 <params value="?referrer=pract1"/>
                 <responseId value="imagingstudy-referrer-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -702,15 +702,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched referrer."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/referrer/display"/>
-				<value value="${referrerDisplay}"/>
+                <value value="${referrerDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_series"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_series"/>
         <description value="test search on series"/>
         <action>
             <operation>
@@ -726,7 +726,7 @@
                 <responseId value="imagingstudy-series-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -738,17 +738,17 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched series."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/series[1]/uid"/>
-				<value value="${series}"/>
+                <value value="${series}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_started"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_started"/>
         <description value="test search on started attribute"/>
-		<action>
+        <action>
             <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
@@ -779,9 +779,9 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-	</test>
-	<test>        
-		<name value="StudyContentNotification_SEARCH_status"/>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_status"/>
         <description value="test search on status"/>
         <action>
             <operation>
@@ -797,7 +797,7 @@
                 <responseId value="imagingstudy-status-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -809,15 +809,15 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched status."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/status"/>
-				<value value="${status}"/>
+                <value value="${status}"/>
                 <warningOnly value="false"/>
             </assert>
-        </action>		
-	</test>
-	<test>
-		<name value="StudyContentNotification_SEARCH_subject"/>
+        </action>
+    </test>
+    <test>
+        <name value="StudyContentNotification_SEARCH_subject"/>
         <description value="test search on subject id"/>
         <action>
             <operation>
@@ -829,12 +829,12 @@
                 <description value="Search the ImagingStudy by subject"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-				<!-- TODO check if we can have a variable to get the patient id 56 instead of writing it directly -->
+                <!-- TODO check if we can have a variable to get the patient id 56 instead of writing it directly -->
                 <params value="?subject=56"/>
                 <responseId value="imagingstudy-subject-response"/>
             </operation>
         </action>
-		<action>
+        <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <resource value="Bundle"/>
@@ -846,16 +846,16 @@
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched subject."/>
                 <direction value="response"/>
-                <operator value="equals"/>  
+                <operator value="equals"/>
                 <path value="Bundle/entry[1]/resource/ImagingStudy/subject/display"/>
-				<value value="${patientDisplay}"/>
+                <value value="${patientDisplay}"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
     </test>
-	<teardown>
-		<action>
-			 <operation>
+    <teardown>
+        <action>
+            <operation>
                 <type>
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="delete"/>
@@ -866,6 +866,6 @@
                 <encodeRequestUrl value="true"/>
                 <params value="/${idImagingStudy}"/>
             </operation>
-		</action>
-	</teardown>
+        </action>
+    </teardown>
 </TestScript>

@@ -1,0 +1,68 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+    ArrowColor #005500
+    LifeLineBorderColor Black
+    ActorFontColor Black
+    ActorBorderColor Black
+    ParticipantBorderColor Black
+    ParticipantBackgroundColor #c9f4ff
+    ActorBackgroundColor #c9f4ff
+}
+
+participant "Tester" as tester
+participant "Verification Script" as verif
+participant "FHIR Server" as server
+
+tester -> verif : Provide Patient identifier
+tester -> verif : Provide device identifier
+tester -> verif : Provide practitioner identifier
+tester -> verif : Provide study-instance-uid identifier
+
+
+group search_patient
+    verif -> server : FHIR SEARCH Patient by identifier attribute
+    activate server #b3ffd7
+    server  -> verif : Return Bundle of Observation resources
+    deactivate server
+
+    verif -> verif : check Bundle.total > 0
+end
+
+group search_device
+    verif -> server : FHIR SEARCH Device by identifier attribute
+    activate server #b3ffd7
+    server  -> verif : Return Bundle of Device resources
+    deactivate server
+
+    verif -> verif : check Bundle.total > 0
+end
+
+group search_practitioner
+    verif -> server : FHIR SEARCH Practitioner by identifier attribute
+    activate server #b3ffd7
+    server  -> verif : Return Bundle of Device resources
+    deactivate server
+
+    verif -> verif : check Bundle.total > 0
+end
+
+group search_imagingstudy
+    verif -> server : FHIR SEARCH ImagingStudy by identifier attribute
+    activate server #b3ffd7
+    server  -> verif : Return Bundle of ImagingStudy resources
+    deactivate server
+
+    verif -> verif : check Bundle.total > 0
+end
+
+group search_radiationdosesummary
+    verif -> server : FHIR SEARCH Radiation Dose Summary by device, patient, and part-of attributes
+    activate server #b3ffd7
+    server  -> verif : Return Bundle of ImagingStudy resources
+    deactivate server
+
+    verif -> verif : check Bundle.total > 0
+end
+@enduml

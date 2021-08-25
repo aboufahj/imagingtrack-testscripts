@@ -2,13 +2,13 @@
 hide footbox
 skinparam sequenceMessageAlign center
 skinparam sequence {
-ArrowColor #005500
-LifeLineBorderColor Black
-ActorFontColor Black
-ActorBorderColor Black
-ParticipantBorderColor Black
-ParticipantBackgroundColor #c9f4ff
-ActorBackgroundColor #c9f4ff
+  ArrowColor #005500
+  LifeLineBorderColor Black
+  ActorFontColor Black
+  ActorBorderColor Black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor #c9f4ff
+  ActorBackgroundColor #c9f4ff
 }
 
 participant "Viewer" as viewer
@@ -35,7 +35,7 @@ end
 group DICOMWeb
   viewer -> pacs : WADO GET study DICOM objects binary
   activate pacs #b3ffd7
-  pacs -> viewer: Return 
+  pacs -> viewer: Return
   deactivate pacs
   viewer -> viewer : Check return code 200
 end

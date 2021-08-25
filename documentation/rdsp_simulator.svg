@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="678px" preserveAspectRatio="none" style="width:814px;height:678px;background:#FFFFFF;" version="1.1" viewBox="0 0 814 678" width="814px" zoomAndPan="magnify"><defs><filter height="300%" id="f1m9aolndbyhto" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="137.6953"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="311.3594"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="442.8906"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="501.1563"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="559.4219"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="617.6875"/><rect fill="#FFFFFF" filter="url(#f1m9aolndbyhto)" height="159.6641" style="stroke:#000000;stroke-width:2.0;" width="790.5" x="10" y="99.4297"/><rect fill="#FFFFFF" filter="url(#f1m9aolndbyhto)" height="117.5313" style="stroke:#000000;stroke-width:2.0;" width="790.5" x="10" y="273.0938"/><rect fill="#FFFFFF" filter="url(#f1m9aolndbyhto)" height="250.1953" style="stroke:#000000;stroke-width:2.0;" width="790.5" x="10" y="404.625"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="109" x2="109" y1="40.2969" y2="671.8203"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="739.5" x2="739.5" y1="40.2969" y2="671.8203"/><rect fill="#C9F4FF" filter="url(#f1m9aolndbyhto)" height="30.2969" style="stroke:#000000;stroke-width:1.5;" width="174" x="20" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="27" y="24.9951">RDSP Simulator Script</text><rect fill="#C9F4FF" filter="url(#f1m9aolndbyhto)" height="30.2969" style="stroke:#000000;stroke-width:1.5;" width="97" x="689.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="696.5" y="24.9951">FHIR Server</text><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="137.6953"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="311.3594"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="442.8906"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="501.1563"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="559.4219"/><rect fill="#B3FFD7" filter="url(#f1m9aolndbyhto)" height="29.1328" style="stroke:#000000;stroke-width:1.0;" width="10" x="735" y="617.6875"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="151" y1="71.4297" y2="71.4297"/><line style="stroke:#005500;stroke-width:1.0;" x1="151" x2="151" y1="71.4297" y2="84.4297"/><line style="stroke:#005500;stroke-width:1.0;" x1="110" x2="151" y1="84.4297" y2="84.4297"/><polygon fill="#005500" points="120,80.4297,110,84.4297,120,88.4297,116,84.4297" style="stroke:#005500;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="617" x="116" y="66.3638">Configure a Bundle of resources (ImagingStudy + Obsevation + Practitioner + Patient) as fixture</text><path d="M10,99.4297 L105,99.4297 L105,106.4297 L95,116.4297 L10,116.4297 L10,99.4297 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="159.6641" style="stroke:#000000;stroke-width:2.0;" width="790.5" x="10" y="99.4297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="50" x="25" y="112.4966">create</text><polygon fill="#005500" points="723,133.6953,733,137.6953,723,141.6953,727,137.6953" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="729" y1="137.6953" y2="137.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="159" x="342.5" y="132.6294">FHIR POST Bundle fixture</text><polygon fill="#005500" points="120,162.8281,110,166.8281,120,170.8281,116,166.8281" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="114" x2="739" y1="166.8281" y2="166.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="207" x="321" y="161.7622">Return Bundle updated resource</text><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="151" y1="195.9609" y2="195.9609"/><line style="stroke:#005500;stroke-width:1.0;" x1="151" x2="151" y1="195.9609" y2="208.9609"/><line style="stroke:#005500;stroke-width:1.0;" x1="110" x2="151" y1="208.9609" y2="208.9609"/><polygon fill="#005500" points="120,204.9609,110,208.9609,120,212.9609,116,208.9609" style="stroke:#005500;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="116" y="190.895">check return code is 201</text><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="151" y1="238.0938" y2="238.0938"/><line style="stroke:#005500;stroke-width:1.0;" x1="151" x2="151" y1="238.0938" y2="251.0938"/><line style="stroke:#005500;stroke-width:1.0;" x1="110" x2="151" y1="251.0938" y2="251.0938"/><polygon fill="#005500" points="120,247.0938,110,251.0938,120,255.0938,116,251.0938" style="stroke:#005500;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="205" x="116" y="233.0278">check response contains Bundle</text><path d="M10,273.0938 L89,273.0938 L89,280.0938 L79,290.0938 L10,290.0938 L10,273.0938 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="117.5313" style="stroke:#000000;stroke-width:2.0;" width="790.5" x="10" y="273.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="34" x="25" y="286.1606">read</text><polygon fill="#005500" points="723,307.3594,733,311.3594,723,315.3594,727,311.3594" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="729" y1="311.3594" y2="311.3594"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="272" x="286" y="306.2935">FHIR GET Observation returned from POST</text><polygon fill="#005500" points="120,336.4922,110,340.4922,120,344.4922,116,340.4922" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="114" x2="739" y1="340.4922" y2="340.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="185" x="332" y="335.4263">Return Observation resource</text><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="151" y1="369.625" y2="369.625"/><line style="stroke:#005500;stroke-width:1.0;" x1="151" x2="151" y1="369.625" y2="382.625"/><line style="stroke:#005500;stroke-width:1.0;" x1="110" x2="151" y1="382.625" y2="382.625"/><polygon fill="#005500" points="120,378.625,110,382.625,120,386.625,116,382.625" style="stroke:#005500;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="116" y="364.5591">check return code is 200</text><path d="M10,404.625 L103,404.625 L103,411.625 L93,421.625 L10,421.625 L10,404.625 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="250.1953" style="stroke:#000000;stroke-width:2.0;" width="790.5" x="10" y="404.625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="48" x="25" y="417.6919">delete</text><polygon fill="#005500" points="723,438.8906,733,442.8906,723,446.8906,727,442.8906" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="729" y1="442.8906" y2="442.8906"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="173" x="335.5" y="437.8247">FHIR DELETE ImagingStudy</text><polygon fill="#005500" points="120,468.0234,110,472.0234,120,476.0234,116,472.0234" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="114" x2="739" y1="472.0234" y2="472.0234"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="151" x="349" y="466.9575">Return server response</text><polygon fill="#005500" points="723,497.1563,733,501.1563,723,505.1563,727,501.1563" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="729" y1="501.1563" y2="501.1563"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="163" x="340.5" y="496.0903">FHIR DELETE Observation</text><polygon fill="#005500" points="120,526.2891,110,530.2891,120,534.2891,116,530.2891" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="114" x2="739" y1="530.2891" y2="530.2891"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="151" x="349" y="525.2231">Return server response</text><polygon fill="#005500" points="723,555.4219,733,559.4219,723,563.4219,727,559.4219" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="729" y1="559.4219" y2="559.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130" x="357" y="554.356">FHIR DELETE Patient</text><polygon fill="#005500" points="120,584.5547,110,588.5547,120,592.5547,116,588.5547" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="114" x2="739" y1="588.5547" y2="588.5547"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="151" x="349" y="583.4888">Return server response</text><polygon fill="#005500" points="723,613.6875,733,617.6875,723,621.6875,727,617.6875" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="109" x2="729" y1="617.6875" y2="617.6875"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="158" x="343" y="612.6216">FHIR DELETE Practitioner</text><polygon fill="#005500" points="120,642.8203,110,646.8203,120,650.8203,116,646.8203" style="stroke:#005500;stroke-width:1.0;"/><line style="stroke:#005500;stroke-width:1.0;" x1="114" x2="739" y1="646.8203" y2="646.8203"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="151" x="349" y="641.7544">Return server response</text><!--MD5=[135459c0d7ad12e24c0037c2528c7748]
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+ArrowColor #005500
+LifeLineBorderColor Black
+ActorFontColor Black
+ActorBorderColor Black
+ParticipantBorderColor Black
+ParticipantBackgroundColor #c9f4ff
+ActorBackgroundColor #c9f4ff
+}
+
+participant "RDSP Simulator Script" as rdsp
+participant "FHIR Server" as server
+
+rdsp -> rdsp : Configure a Bundle of resources (ImagingStudy + Obsevation + Practitioner + Patient) as fixture
+
+group create
+  rdsp -> server: FHIR POST Bundle fixture
+  activate server #b3ffd7
+  server  -> rdsp : Return Bundle updated resource
+  deactivate server
+  rdsp -> rdsp : check return code is 201
+  rdsp -> rdsp : check response contains Bundle
+end
+
+group read
+  rdsp  -> server : FHIR GET Observation returned from POST
+  activate server #b3ffd7
+  server  -> rdsp : Return Observation resource
+  deactivate server
+  rdsp  -> rdsp  : check return code is 200
+end
+
+
+group delete
+  rdsp-> server : FHIR DELETE ImagingStudy
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+
+  rdsp-> server : FHIR DELETE Observation
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+
+  rdsp-> server : FHIR DELETE Patient
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+
+  rdsp-> server : FHIR DELETE Practitioner
+  activate server #b3ffd7
+  server  -> rdsp: Return server response
+  deactivate server
+end
+@enduml
+
+PlantUML version 1.2021.10beta3(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
