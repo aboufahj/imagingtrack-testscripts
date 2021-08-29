@@ -377,14 +377,6 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        <action>
-            <assert>
-                <description value="Confirm that there are a returned ImagingStudy related to the searched identifier."/>
-                <!-- TODO check if possible to select and check on id -->
-                <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
-                <warningOnly value="false"/>
-            </assert>
-        </action>
     </test>
     <test>
         <name value="FHIREnhancedViewer_search_identifier_sys"/>
