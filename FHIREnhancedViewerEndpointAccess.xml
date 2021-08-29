@@ -1,7 +1,7 @@
 <TestScript xmlns="http://hl7.org/fhir">
-    <id value="FHIREnhancedViewer_EndpointAccess"/>
+    <id value="FHIREnhancedViewerEndpointAccess"/>
     <url value="https://build.fhir.org/ig/HL7/TestScript-RDSP-Simulator.json"/>
-    <name value="FHIREnhancedViewer_EndpointAccess"/>
+    <name value="FHIREnhancedViewerEndpointAccess"/>
     <status value="active"/>
     <date value="2021-08-15"/>
     <publisher value="HL7 Imaging Integration Workgroup"/>
@@ -113,9 +113,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a address element."/>
-                <sourceId value="endpoint-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="Endpoint/address"/>
+                <sourceId value="endpoint-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -130,6 +130,7 @@
                     <code value="read"/>
                 </type>
                 <description value="Read the WADO study resource"/>
+                <encodeRequestUrl value="true"/>
                 <responseId value="wado-read-response"/>
                 <url value="${endpointId}/studies/${studyUid}"/>
             </operation>

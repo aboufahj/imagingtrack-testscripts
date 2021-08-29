@@ -1,7 +1,7 @@
 <TestScript xmlns="http://hl7.org/fhir">
-    <id value="FHIREnhancedViewer_SearchParam"/>
+    <id value="FHIREnhancedViewerSearchParam"/>
     <url value="https://build.fhir.org/ig/HL7/TestScript-RDSP-Simulator.json"/>
-    <name value="FHIREnhancedViewer_SearchParam"/>
+    <name value="FHIREnhancedViewerSearchParam"/>
     <status value="active"/>
     <date value="2021-08-15"/>
     <publisher value="HL7 Imaging Integration Workgroup"/>
@@ -160,9 +160,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a basedon element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/basedOn/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -183,7 +183,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -195,9 +194,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a series/bodySite/code element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/series/bodySite/code"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -218,7 +217,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -240,9 +238,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a series/instance/sopClass/code element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/series/instance/sopClass/code"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -263,7 +261,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -285,9 +282,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a encounter element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/encounter/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -308,7 +305,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -320,9 +316,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a endpoint element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/endpoint/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -343,7 +339,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -355,9 +350,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a identifier element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/identifier/value"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -378,7 +373,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -386,8 +380,6 @@
         <action>
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched identifier."/>
-                <direction value="response"/>
-                <resource value="Bundle"/>
                 <!-- TODO check if possible to select and check on id -->
                 <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
                 <warningOnly value="false"/>
@@ -400,9 +392,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a identifier element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/identifier/system"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -423,7 +415,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -445,9 +436,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a instance uid element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/series/instance/uid"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -468,7 +459,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -490,9 +480,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are an interpreter element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/interpreter/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -513,7 +503,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -525,9 +514,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a modality element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/series/modality/code"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -548,7 +537,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -570,9 +558,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a subject element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/subject/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -593,7 +581,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -605,9 +592,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a performer element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/series/performer/actor/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -628,7 +615,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -640,9 +626,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a reasonCode element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/reasonCode/coding/code"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -663,7 +649,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -685,9 +670,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a referrer element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/reasonCode/coding/code"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -708,7 +693,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -720,9 +704,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a series element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/series/uid"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -743,7 +727,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -765,9 +748,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a started element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/started"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -795,8 +778,6 @@
         <action>
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched started."/>
-                <direction value="response"/>
-                <resource value="Bundle"/>
                 <!-- TODO check if possible to select and check on id -->
                 <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
                 <warningOnly value="false"/>
@@ -809,9 +790,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a status element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/status"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -832,7 +813,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -855,9 +835,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a subject element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/subject/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -878,7 +858,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>

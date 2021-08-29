@@ -1,12 +1,7 @@
 <TestScript xmlns="http://hl7.org/fhir">
-   <id value="TestScript_RDSC_Simulator"/>
-   <meta>
-      <versionId value="1"/>
-      <lastUpdated value="2021-07-19T15:03:17.034+02:00"/>
-      <source value="#QIJj07p2hJBEUIvc"/>
-   </meta>
+   <id value="RDSCSimulator"/>
    <url value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/TestScript-RDSC-Simulator.json"/>
-   <name value="TestScript_RDSC_Simulator"/>
+   <name value="RDSCSimulator"/>
    <status value="active"/>
    <date value="2021-07-17"/>
    <publisher value="HL7 Imaging Integration Workgroup"/>
@@ -26,6 +21,14 @@
    </contact>
    <description value="TestScript to validate the FHIR Server searching capabilities."/>
    <copyright value="HL7 2021"/>
+   <origin>
+      <index value="1"/>
+      <profile>
+         <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types"/>
+         <code value="FHIR-Client"/>
+         <display value="FHIR Client"/>
+      </profile>
+   </origin>
    <destination>
       <index value="1"/>
       <profile>
@@ -34,6 +37,28 @@
          <display value="FHIR Server"/>
       </profile>
    </destination>
+   <metadata>
+      <link>
+         <url value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/"/>
+         <description value="This IG standardizes the sharing of minimal radiation information following a performed exam."/>
+      </link>
+      <capability>
+         <required value="true"/>
+         <validated value="false"/>
+         <description value="The Capability requirements for the RDSC actor"/>
+         <origin value="1"/>
+         <link value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/CapabilityStatement-RDSC.html"/>
+         <capabilities value="http://hl7.org/fhir/uv/radiation-dose-summary/CapabilityStatement/RDSC"/>
+      </capability>
+      <capability>
+         <required value="true"/>
+         <validated value="false"/>
+         <description value="The Capability requirements for the FHIR Server actor"/>
+         <destination value="1"/>
+         <link value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/CapabilityStatement-FHIRServer-RDSC.html"/>
+         <capabilities value="http://hl7.org/fhir/uv/radiation-dose-summary/CapabilityStatement/FHIRServer-RDSC"/>
+      </capability>
+   </metadata>
    <variable>
       <name value="rdsResourceId"/>
       <defaultValue value="b2b7c08611db4b4cad077e8467368273"/>
@@ -129,7 +154,6 @@
       <action>
          <assert>
             <description value="Confirm that the total number of response is greater than 1."/>
-            <resource value="Bundle"/>
             <expression value="Bundle.total.toInteger() &gt;= 1"/>
             <warningOnly value="false"/>
          </assert>
@@ -155,7 +179,6 @@
       <action>
          <assert>
             <description value="Confirm that the total number of response is greater than 1."/>
-            <resource value="Bundle"/>
             <expression value="Bundle.total.toInteger() &gt;= 1"/>
             <warningOnly value="false"/>
          </assert>
@@ -181,7 +204,6 @@
       <action>
          <assert>
             <description value="Confirm that the total number of response is greater than 1."/>
-            <resource value="Bundle"/>
             <expression value="Bundle.total.toInteger() &gt;= 1"/>
             <warningOnly value="false"/>
          </assert>
@@ -207,7 +229,6 @@
       <action>
          <assert>
             <description value="Confirm that the total number of response is greater than 1."/>
-            <resource value="Bundle"/>
             <expression value="Bundle.total.toInteger() &gt;= 1"/>
             <warningOnly value="false"/>
          </assert>
@@ -233,7 +254,6 @@
       <action>
          <assert>
             <description value="Confirm that the total number of response is greater than 1."/>
-            <resource value="Bundle"/>
             <expression value="Bundle.total.toInteger() &gt;= 1"/>
             <warningOnly value="false"/>
          </assert>
@@ -268,7 +288,6 @@
       <action>
          <assert>
             <description value="Confirm that the returned Patient is not empty."/>
-            <resource value="Patient"/>
             <direction value="response"/>
             <operator value="notEmpty"/>
             <path value="id"/>
@@ -305,7 +324,6 @@
       <action>
          <assert>
             <description value="Confirm that the returned Device is not empty."/>
-            <resource value="Device"/>
             <direction value="response"/>
             <operator value="notEmpty"/>
             <path value="id"/>
@@ -342,7 +360,6 @@
       <action>
          <assert>
             <description value="Confirm that the returned Practitioner is not empty."/>
-            <resource value="Practitioner"/>
             <direction value="response"/>
             <operator value="notEmpty"/>
             <path value="id"/>
@@ -379,7 +396,6 @@
       <action>
          <assert>
             <description value="Confirm that the returned ImagingStudy is not empty."/>
-            <resource value="ImagingStudy"/>
             <direction value="response"/>
             <operator value="notEmpty"/>
             <path value="id"/>

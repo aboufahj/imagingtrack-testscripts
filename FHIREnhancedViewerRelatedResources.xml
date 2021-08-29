@@ -1,7 +1,7 @@
 <TestScript xmlns="http://hl7.org/fhir">
-    <id value="FHIREnhancedViewer_RelatedResources"/>
+    <id value="FHIREnhancedViewerRelatedResources"/>
     <url value="https://build.fhir.org/ig/HL7/TestScript-RDSP-Simulator.json"/>
-    <name value="FHIREnhancedViewer_RelatedResources"/>
+    <name value="FHIREnhancedViewerRelatedResources"/>
     <status value="active"/>
     <date value="2021-08-15"/>
     <publisher value="HL7 Imaging Integration Workgroup"/>
@@ -110,9 +110,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a subject element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/subject/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -145,9 +145,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a encounter element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/encounter/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -180,9 +180,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a basedOn element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/basedOn/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -215,9 +215,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a referrer element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/referrer/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -250,9 +250,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a interpreter element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/interpreter/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -285,9 +285,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a procedureReference element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/procedureReference/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -320,9 +320,9 @@
         <action>
             <assert>
                 <description value="Confirm that there are a reasonReference element."/>
-                <sourceId value="imagingstudy-read-response"/>
                 <operator value="notEmpty"/>
                 <path value="ImagingStudy/reasonReference/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
                 <warningOnly value="false"/>
             </assert>
         </action>

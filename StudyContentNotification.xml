@@ -219,7 +219,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -255,7 +254,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -291,7 +289,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -328,7 +325,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -365,7 +361,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -401,7 +396,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -409,8 +403,6 @@
         <action>
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched identifier."/>
-                <direction value="response"/>
-                <resource value="Bundle"/>
                 <!-- TODO check if possible to select and check on id -->
                 <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
                 <warningOnly value="false"/>
@@ -437,7 +429,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -473,7 +464,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -510,7 +500,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -546,7 +535,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -583,7 +571,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -620,7 +607,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -656,7 +642,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -693,7 +678,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -729,7 +713,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -772,8 +755,6 @@
         <action>
             <assert>
                 <description value="Confirm that there are a returned ImagingStudy related to the searched started."/>
-                <direction value="response"/>
-                <resource value="Bundle"/>
                 <!-- TODO check if possible to select and check on id -->
                 <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
                 <warningOnly value="false"/>
@@ -800,7 +781,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -837,7 +817,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>

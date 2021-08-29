@@ -1,7 +1,7 @@
 <TestScript xmlns="http://hl7.org/fhir">
-    <id value="TestScript_RDS_Sharing_Verification"/>
+    <id value="RDSSharingVerification"/>
     <url value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/TestScript-RDS-sharing-verification.json"/>
-    <name value="TestScript_RDS_Sharing_Verification"/>
+    <name value="RDSSharingVerification"/>
     <status value="active"/>
     <date value="2021-07-17"/>
     <publisher value="HL7 Imaging Integration Workgroup"/>
@@ -21,6 +21,14 @@
     </contact>
     <description value="TestScript to validate the sharing data between RDSP actor and a FHIR Server."/>
     <copyright value="HL7 2021"/>
+    <origin>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types"/>
+            <code value="FHIR-Client"/>
+            <display value="FHIR Client"/>
+        </profile>
+    </origin>
     <destination>
         <index value="1"/>
         <profile>
@@ -29,6 +37,28 @@
             <display value="FHIR Server"/>
         </profile>
     </destination>
+    <metadata>
+        <link>
+            <url value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig"/>
+            <description value="This IG standardizes the sharing of minimal radiation information following a performed exam."/>
+        </link>
+        <capability>
+            <required value="true"/>
+            <validated value="false"/>
+            <description value="The Capability requirements for the RDSP actor"/>
+            <origin value="1"/>
+            <link value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/CapabilityStatement-RDSP.html"/>
+            <capabilities value="http://hl7.org/fhir/uv/radiation-dose-summary/CapabilityStatement/RDSP"/>
+        </capability>
+        <capability>
+            <required value="true"/>
+            <validated value="false"/>
+            <description value="The Capability requirements for the FHIR Server actor"/>
+            <destination value="1"/>
+            <link value="https://build.fhir.org/ig/HL7/fhir-radiation-dose-summary-ig/CapabilityStatement-FHIRServer.html"/>
+            <capabilities value="http://hl7.org/fhir/uv/radiation-dose-summary/CapabilityStatement/FHIRServer"/>
+        </capability>
+    </metadata>
     <variable>
         <name value="patientIdentifier"/>
         <defaultValue value="PAT3421"/>
@@ -89,7 +119,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -115,7 +144,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -134,14 +162,13 @@
                 <description value="Search for matching Practitioner related to the identifier ${practitionerIdentifier}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-                <params value="?identifier=pract67"/>
+                <params value="?identifier=${practitionerIdentifier}"/>
                 <responseId value="practitioner-search-response"/>
             </operation>
         </action>
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -160,14 +187,13 @@
                 <description value="Search for matching ImagingStudy related to the studyInstanceUID ${studyInstanceUID}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-                <params value="?identifier=urn:oid:1.2.840.121.3.32.0.1.25"/>
+                <params value="?identifier=urn:oid:${studyInstanceUID}"/>
                 <responseId value="imagingstudy-search-response"/>
             </operation>
         </action>
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
@@ -193,7 +219,6 @@
         <action>
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
-                <resource value="Bundle"/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
                 <warningOnly value="false"/>
             </assert>
