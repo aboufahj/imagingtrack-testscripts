@@ -39,7 +39,7 @@
     </destination>
     <variable>
         <name value="imagingStudyResourceId"/>
-        <defaultValue value="example-xr"/>
+        <defaultValue value="e4f310a418e545ee88591d6fba1b6a7d"/>
         <description value="Enter the ImagingStudy ID"/>
     </variable>
     <variable>
