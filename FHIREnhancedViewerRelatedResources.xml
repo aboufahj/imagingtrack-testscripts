@@ -44,37 +44,37 @@
     </variable>
     <variable>
         <name value="subjectLink"/>
-        <path value="ImagingStudy/subject/reference" />
+        <path value="ImagingStudy/subject/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="encounterLink"/>
-        <path value="ImagingStudy/encounter/reference" />
+        <path value="ImagingStudy/encounter/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="basedonLink"/>
-        <path value="ImagingStudy/basedOn/reference" />
+        <path value="ImagingStudy/basedOn/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="referrerLink"/>
-        <path value="ImagingStudy/referrer/reference" />
+        <path value="ImagingStudy/referrer/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="interpreterLink"/>
-        <path value="ImagingStudy/interpreter/reference" />
+        <path value="ImagingStudy/interpreter/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="procedureLink"/>
-        <path value="ImagingStudy/procedureReference/reference" />
+        <path value="ImagingStudy/procedureReference/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="reasonReferenceLink"/>
-        <path value="ImagingStudy/reasonReference/reference" />
+        <path value="ImagingStudy/reasonReference/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
@@ -122,6 +122,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Patient"/>
                 <description value="Read the subject resource ${subjectLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -157,6 +158,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Encounter"/>
                 <description value="Read the encounter resource ${encounterLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -192,6 +194,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="ServiceRequest"/>
                 <description value="Read the basedon resource ${basedonLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -227,6 +230,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Practitioner"/>
                 <description value="Read the referrer resource ${referrerLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -262,6 +266,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Practitioner"/>
                 <description value="Read the interpreter resource ${interpreterLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -297,6 +302,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Procedure"/>
                 <description value="Read the procedure resource ${procedureLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -332,6 +338,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Condition"/>
                 <description value="Read the reasonReference resource ${reasonReferenceLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>

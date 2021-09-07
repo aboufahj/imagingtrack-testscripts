@@ -44,18 +44,18 @@
     </variable>
     <variable>
         <name value="endpointId"/>
-        <path value="ImagingStudy/endpoint/reference" />
+        <path value="ImagingStudy/endpoint/reference"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="wadoUrl"/>
-        <path value="Endpoint/address" />
+        <path value="Endpoint/address"/>
         <sourceId value="endpoint-read-response"/>
     </variable>
     <!-- TODO fix when there are multi Uid -->
     <variable>
         <name value="studyUid"/>
-        <path value="ImagingStudy/identifier/value" />
+        <path value="ImagingStudy/identifier/value"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
@@ -94,6 +94,7 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="Endpoint"/>
                 <description value="Read the Endpoint resource ${endpointId}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
@@ -129,10 +130,11 @@
                     <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
                     <code value="read"/>
                 </type>
+                <resource value="ImagingStudy"/>
                 <description value="Read the WADO study resource"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="wado-read-response"/>
-                <url value="${endpointId}/studies/${studyUid}"/>
+                <url value="${wadoUrl}/studies/${studyUid}"/>
             </operation>
         </action>
         <action>

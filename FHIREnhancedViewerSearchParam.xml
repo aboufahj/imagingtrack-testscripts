@@ -39,7 +39,7 @@
     </destination>
     <variable>
         <name value="imagingStudyResourceId"/>
-        <defaultValue value="e4f310a418e545ee88591d6fba1b6a7d"/>
+        <defaultValue value="example-xr"/>
         <description value="Enter the ImagingStudy ID"/>
     </variable>
     <variable>
@@ -64,17 +64,23 @@
     </variable>
     <variable>
         <name value="subjectLink"/>
-        <path value="ImagingStudy/subject/reference"/>
+		<expression value="ImagingStudy.subject.reference.replaceMatches('.*Patient/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/subject/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="referrerLink"/>
-        <path value="ImagingStudy/referrer/reference"/>
+        <expression value="ImagingStudy.referrer.reference.replaceMatches('.*(Practitioner|PractitionerRole)/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/referrer/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="interpreterLink"/>
-        <path value="ImagingStudy/interpreter/reference"/>
+        <expression value="ImagingStudy.interpreter.reference.replaceMatches('.*(Practitioner|PractitionerRole)/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/interpreter/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
@@ -84,17 +90,23 @@
     </variable>
     <variable>
         <name value="endpointLink"/>
-        <path value="ImagingStudy/endpoint/reference"/>
+        <expression value="ImagingStudy.endpoint.reference.replaceMatches('.*Endpoint/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/endpoint/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="encounterLink"/>
-        <path value="ImagingStudy/encounter/reference"/>
+        <expression value="ImagingStudy.encounter.reference.replaceMatches('.*Encounter/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/encounter/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="basedonLink"/>
-        <path value="ImagingStudy/basedOn/reference"/>
+        <expression value="ImagingStudy.basedOn.reference.replaceMatches('.*(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/basedOn/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
@@ -124,7 +136,9 @@
     </variable>
     <variable>
         <name value="performerLink"/>
-        <path value="ImagingStudy/series/performer/actor/reference"/>
+        <expression value="ImagingStudy.series.performer.actor.reference.replaceMatches('.*(Practitioner|PractitionerRole|Organization|CareTeam|Patient|Device|RelatedPerson)/','').replaceMatches('/_history.*','')"/>
+        <!-- use only with plan_executor -->
+		<!--path value="ImagingStudy/series/performer/actor/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
@@ -400,7 +414,7 @@
                 <description value="Search the ImagingStudy by identifier"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-                <params value="?identifier=${identifierValue}|${identifierSystem}"/>
+                <params value="?identifier=${identifierSystem}|${identifierValue}"/>
                 <responseId value="imagingstudy-identifier-system-response"/>
             </operation>
         </action>
@@ -819,7 +833,6 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-
     </test>
     <test>
         <name value="FHIREnhancedViewer_search_subject"/>

@@ -400,14 +400,6 @@
                 <warningOnly value="false"/>
             </assert>
         </action>
-        <action>
-            <assert>
-                <description value="Confirm that there are a returned ImagingStudy related to the searched identifier."/>
-                <!-- TODO check if possible to select and check on id -->
-                <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
-                <warningOnly value="false"/>
-            </assert>
-        </action>
     </test>
     <test>
         <name value="StudyContentNotification_SEARCH_identifier_system"/>
@@ -419,10 +411,10 @@
                     <code value="search"/>
                 </type>
                 <resource value="ImagingStudy"/>
-                <description value="Search the ImagingStudy by identifier"/>
+                <description value="Search the ImagingStudy by identifier and system"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
-                <params value="?identifier=${identifierValue}|${identifierSystem}"/>
+                <params value="?identifier=${identifierSystem}|${identifierValue}"/>
                 <responseId value="imagingstudy-identifier-system-response"/>
             </operation>
         </action>
@@ -749,14 +741,6 @@
             <assert>
                 <description value="Confirm that the total number of response is greater than 1."/>
                 <expression value="Bundle.total.toInteger() &gt;= 1"/>
-                <warningOnly value="false"/>
-            </assert>
-        </action>
-        <action>
-            <assert>
-                <description value="Confirm that there are a returned ImagingStudy related to the searched started."/>
-                <!-- TODO check if possible to select and check on id -->
-                <expression value="Bundle.entry.select(resource as ImagingStudy).exists()"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
