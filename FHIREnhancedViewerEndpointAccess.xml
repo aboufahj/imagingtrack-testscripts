@@ -52,10 +52,9 @@
         <path value="Endpoint/address"/>
         <sourceId value="endpoint-read-response"/>
     </variable>
-    <!-- TODO fix when there are multi Uid -->
     <variable>
         <name value="studyUid"/>
-        <path value="ImagingStudy/identifier/value"/>
+        <expression value="ImagingStudy.identifier.where(system = 'urn:dicom:uid')[0].value.replaceMatches('urn:oid:','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
@@ -77,10 +76,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -104,10 +103,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -132,6 +131,7 @@
                 </type>
                 <resource value="ImagingStudy"/>
                 <description value="Read the WADO study resource"/>
+                <accept code='multipart/related; type="application/dicom"' />
                 <encodeRequestUrl value="true"/>
                 <responseId value="wado-read-response"/>
                 <url value="${wadoUrl}/studies/${studyUid}"/>
@@ -139,10 +139,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>

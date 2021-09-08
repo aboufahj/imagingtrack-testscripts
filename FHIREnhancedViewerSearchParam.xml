@@ -44,7 +44,7 @@
     </variable>
     <variable>
         <name value="dateImagingStudy"/>
-        <path value="ImagingStudy/started"/>
+        <expression value="ImagingStudy.started.replaceMatches('T.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
@@ -65,22 +65,16 @@
     <variable>
         <name value="subjectLink"/>
 		<expression value="ImagingStudy.subject.reference.replaceMatches('.*Patient/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/subject/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="referrerLink"/>
         <expression value="ImagingStudy.referrer.reference.replaceMatches('.*(Practitioner|PractitionerRole)/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/referrer/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="interpreterLink"/>
         <expression value="ImagingStudy.interpreter.reference.replaceMatches('.*(Practitioner|PractitionerRole)/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/interpreter/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
@@ -91,22 +85,16 @@
     <variable>
         <name value="endpointLink"/>
         <expression value="ImagingStudy.endpoint.reference.replaceMatches('.*Endpoint/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/endpoint/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="encounterLink"/>
         <expression value="ImagingStudy.encounter.reference.replaceMatches('.*Encounter/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/encounter/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="basedonLink"/>
         <expression value="ImagingStudy.basedOn[0].reference.replaceMatches('.*(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/basedOn/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
@@ -137,8 +125,6 @@
     <variable>
         <name value="performerLink"/>
         <expression value="ImagingStudy.series.performer.actor.reference.replaceMatches('.*(Practitioner|PractitionerRole|Organization|CareTeam|Patient|Device|RelatedPerson)/','').replaceMatches('/_history.*','')"/>
-        <!-- use only with plan_executor -->
-		<!--path value="ImagingStudy/series/performer/actor/reference"/-->
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
@@ -160,10 +146,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>

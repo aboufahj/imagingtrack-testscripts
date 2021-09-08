@@ -96,10 +96,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -132,10 +132,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -168,10 +168,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -204,10 +204,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -240,10 +240,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -276,10 +276,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -312,10 +312,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>
@@ -348,10 +348,10 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned HTTP status is 200(OK)."/>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
                 <direction value="response"/>
                 <operator value="in"/>
-                <responseCode value="200"/>
+                <responseCode value="200,201"/>
                 <warningOnly value="false"/>
             </assert>
         </action>

@@ -28,23 +28,23 @@
         "display": "Encounter1"
     },
     "started": "2019-01-23T11:45:30.000Z",
-	"basedOn": {
+	"basedOn": [{
         "reference": "ServiceRequest/sr1",
         "display": "Scheduled Exam"
-    },
+    }],
 	"referrer": {
         "reference": "Practitioner/pract1",
         "display": "Practitioner Referer"
     },
-	"interpreter": {
+	"interpreter": [{
         "reference": "Practitioner/pract2",
         "display": "Practitioner Interpreter"
-    },
-	"endpoint": {
+    }],
+	"endpoint": [{
         "reference": "Endpoint/endp1",
         "display": "Study Endpoint"
-    },
-	"reasonCode": {
+    }],
+	"reasonCode": [{
 	  "coding" : [
 		{
 		  "system" : "http://snomed.info/sct",
@@ -52,7 +52,7 @@
 		  "display" : "Homoiothermia"
 		}
 	  ]
-	},
+	}],
 	"numberOfSeries": 1,
   "numberOfInstances": 1,
   "series": [
