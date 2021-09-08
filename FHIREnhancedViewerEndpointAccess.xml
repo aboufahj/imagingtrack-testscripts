@@ -98,8 +98,8 @@
                 <description value="Read the Endpoint resource ${endpointId}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${endpointId}"/>
                 <responseId value="endpoint-read-response"/>
-                <url value="/${endpointId}"/>
             </operation>
         </action>
         <action>

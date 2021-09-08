@@ -241,8 +241,8 @@
             <description value="Read the Patient ${patientId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
+            <params value="/${patientId}"/>
             <responseId value="patient-read-response"/>
-            <url value="/${patientId}"/>
          </operation>
       </action>
       <action>
@@ -278,8 +278,8 @@
             <description value="Read the Device ${deviceId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
+            <params value="/${deviceId}"/>
             <responseId value="device-read-response"/>
-            <url value="/${deviceId}"/>
          </operation>
       </action>
       <action>
@@ -315,8 +315,8 @@
             <description value="Read the Practitioner ${practitionerId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
+            <params value="/${practitionerId}"/>
             <responseId value="practitioner-read-response"/>
-            <url value="/${practitionerId}"/>
          </operation>
       </action>
       <action>
@@ -352,8 +352,8 @@
             <description value="Read the ImagingStudy ${imagingStudyId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
+            <params value="/${imagingStudyId}"/>
             <responseId value="imagingstudy-read-response"/>
-            <url value="/${imagingStudyId}"/>
          </operation>
       </action>
       <action>

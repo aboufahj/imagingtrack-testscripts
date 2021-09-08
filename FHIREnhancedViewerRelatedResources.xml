@@ -126,8 +126,8 @@
                 <description value="Read the subject resource ${subjectLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${subjectLink}"/>
                 <responseId value="subject-read-response"/>
-                <url value="/${subjectLink}"/>
             </operation>
         </action>
         <action>
@@ -162,8 +162,8 @@
                 <description value="Read the encounter resource ${encounterLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${encounterLink}"/>
                 <responseId value="encounter-read-response"/>
-                <url value="/${encounterLink}"/>
             </operation>
         </action>
         <action>
@@ -198,8 +198,8 @@
                 <description value="Read the basedon resource ${basedonLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${basedonLink}"/>
                 <responseId value="basedon-read-response"/>
-                <url value="/${basedonLink}"/>
             </operation>
         </action>
         <action>
@@ -234,8 +234,8 @@
                 <description value="Read the referrer resource ${referrerLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${referrerLink}"/>
                 <responseId value="encounter-read-response"/>
-                <url value="/${referrerLink}"/>
             </operation>
         </action>
         <action>
@@ -270,8 +270,8 @@
                 <description value="Read the interpreter resource ${interpreterLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${interpreterLink}"/>
                 <responseId value="interpreter-read-response"/>
-                <url value="/${interpreterLink}"/>
             </operation>
         </action>
         <action>
@@ -306,8 +306,8 @@
                 <description value="Read the procedure resource ${procedureLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${procedureLink}"/>
                 <responseId value="procedure-read-response"/>
-                <url value="/${procedureLink}"/>
             </operation>
         </action>
         <action>
@@ -342,8 +342,8 @@
                 <description value="Read the reasonReference resource ${reasonReferenceLink}"/>
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
+                <params value="/${reasonReferenceLink}"/>
                 <responseId value="reason-reference-read-response"/>
-                <url value="/${reasonReferenceLink}"/>
             </operation>
         </action>
         <action>
