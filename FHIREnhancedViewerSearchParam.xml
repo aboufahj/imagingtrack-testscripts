@@ -45,7 +45,7 @@
     <variable>
         <name value="dateImagingStudy"/>
         <path value="ImagingStudy/started"/>
-        <sourceId value="imagingstudy-post-response"/>
+        <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="identifierValue"/>
@@ -104,7 +104,7 @@
     </variable>
     <variable>
         <name value="basedonLink"/>
-        <expression value="ImagingStudy.basedOn.reference.replaceMatches('.*(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)/','').replaceMatches('/_history.*','')"/>
+        <expression value="ImagingStudy.basedOn[0].reference.replaceMatches('.*(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)/','').replaceMatches('/_history.*','')"/>
         <!-- use only with plan_executor -->
 		<!--path value="ImagingStudy/basedOn/reference"/-->
         <sourceId value="imagingstudy-read-response"/>

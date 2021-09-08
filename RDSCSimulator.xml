@@ -37,42 +37,21 @@
    <variable>
       <name value="patientId"/>
       <expression value="Observation.subject.reference.replaceMatches('.*Patient/','').replaceMatches('/_history.*','')"/>
-      <!-- use only with plan_executor -->
-	  <!--path value="Observation/subject/reference"/-->
-      <sourceId value="rds-read-response"/>
-   </variable>
-   <variable>
-      <name value="patientLink"/>
-      <path value="Observation/subject/reference"/>
       <sourceId value="rds-read-response"/>
    </variable>
    <variable>
       <name value="deviceId"/>
       <expression value="Observation.device.reference.replaceMatches('.*Device/','').replaceMatches('/_history.*','')"/>
-      <!-- use only with plan_executor -->
-	  <!--path value="Observation/device/reference"/-->
       <sourceId value="rds-read-response"/>
    </variable>
    <variable>
-      <name value="deviceLink"/>
-      <path value="Observation/device/reference"/>
-      <sourceId value="rds-read-response"/>
-   </variable>
-   <variable>
-      <name value="practitionerLink"/>
-      <path value="Observation/performer/reference"/>
+      <name value="practitionerId"/>
+      <expression value="Observation.performer.reference.replaceMatches('.*Practitioner/','').replaceMatches('/_history.*','')"/>
       <sourceId value="rds-read-response"/>
    </variable>
    <variable>
       <name value="imagingStudyId"/>
       <expression value="Observation.partOf.reference.replaceMatches('.*(MedicationAdministration|MedicationDispense|MedicationStatement|Procedure|Immunization|ImagingStudy)/','').replaceMatches('/_history.*','')"/>
-      <!-- use only with plan_executor -->
-	  <!--path value="Observation/partOf/reference"/-->
-      <sourceId value="rds-read-response"/>
-   </variable>
-   <variable>
-      <name value="imagingStudyLink"/>
-      <path value="Observation/partOf/reference"/>
       <sourceId value="rds-read-response"/>
    </variable>
    <variable>
@@ -259,11 +238,11 @@
                <code value="read"/>
             </type>
             <resource value="Patient"/>
-            <description value="Read the Patient ${patientLink}"/>
+            <description value="Read the Patient ${patientId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
             <responseId value="patient-read-response"/>
-            <url value="${patientLink}"/>
+            <url value="/${patientId}"/>
          </operation>
       </action>
       <action>
@@ -296,11 +275,11 @@
                <code value="read"/>
             </type>
             <resource value="Device"/>
-            <description value="Read the Device ${deviceLink}"/>
+            <description value="Read the Device ${deviceId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
             <responseId value="device-read-response"/>
-            <url value="${deviceLink}"/>
+            <url value="/${deviceId}"/>
          </operation>
       </action>
       <action>
@@ -333,11 +312,11 @@
                <code value="read"/>
             </type>
             <resource value="Practitioner"/>
-            <description value="Read the Practitioner ${practitionerLink}"/>
+            <description value="Read the Practitioner ${practitionerId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
             <responseId value="practitioner-read-response"/>
-            <url value="${practitionerLink}"/>
+            <url value="/${practitionerId}"/>
          </operation>
       </action>
       <action>
@@ -370,11 +349,11 @@
                <code value="read"/>
             </type>
             <resource value="ImagingStudy"/>
-            <description value="Read the ImagingStudy ${imagingStudyLink}"/>
+            <description value="Read the ImagingStudy ${imagingStudyId}"/>
             <accept value="json"/>
             <encodeRequestUrl value="true"/>
             <responseId value="imagingstudy-read-response"/>
-            <url value="${imagingStudyLink}"/>
+            <url value="/${imagingStudyId}"/>
          </operation>
       </action>
       <action>

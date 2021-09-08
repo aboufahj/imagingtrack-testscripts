@@ -44,37 +44,37 @@
     </variable>
     <variable>
         <name value="subjectLink"/>
-        <path value="ImagingStudy/subject/reference"/>
+        <expression value="ImagingStudy.subject.reference.replaceMatches('.*Patient/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="encounterLink"/>
-        <path value="ImagingStudy/encounter/reference"/>
+        <expression value="ImagingStudy.encounter.reference.replaceMatches('.*Encounter/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="basedonLink"/>
-        <path value="ImagingStudy/basedOn/reference"/>
+        <expression value="ImagingStudy.basedOn[0].reference.replaceMatches('.*(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="referrerLink"/>
-        <path value="ImagingStudy/referrer/reference"/>
+        <expression value="ImagingStudy.referrer.reference.replaceMatches('.*(Practitioner|PractitionerRole)/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="interpreterLink"/>
-        <path value="ImagingStudy/interpreter/reference"/>
+        <expression value="ImagingStudy.interpreter.reference.replaceMatches('.*(Practitioner|PractitionerRole)/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="procedureLink"/>
-        <path value="ImagingStudy/procedureReference/reference"/>
+        <expression value="ImagingStudy.procedureReference.reference.replaceMatches('.*Procedure/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
         <name value="reasonReferenceLink"/>
-        <path value="ImagingStudy/reasonReference/reference"/>
+        <expression value="ImagingStudy.reasonReference.reference.replaceMatches('.*Condition/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <test>
@@ -127,7 +127,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="subject-read-response"/>
-                <url value="${subjectLink}"/>
+                <url value="/${subjectLink}"/>
             </operation>
         </action>
         <action>
@@ -163,7 +163,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="encounter-read-response"/>
-                <url value="${encounterLink}"/>
+                <url value="/${encounterLink}"/>
             </operation>
         </action>
         <action>
@@ -199,7 +199,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="basedon-read-response"/>
-                <url value="${basedonLink}"/>
+                <url value="/${basedonLink}"/>
             </operation>
         </action>
         <action>
@@ -235,7 +235,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="encounter-read-response"/>
-                <url value="${referrerLink}"/>
+                <url value="/${referrerLink}"/>
             </operation>
         </action>
         <action>
@@ -271,7 +271,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="interpreter-read-response"/>
-                <url value="${interpreterLink}"/>
+                <url value="/${interpreterLink}"/>
             </operation>
         </action>
         <action>
@@ -307,7 +307,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="procedure-read-response"/>
-                <url value="${procedureLink}"/>
+                <url value="/${procedureLink}"/>
             </operation>
         </action>
         <action>
@@ -343,7 +343,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="reason-reference-read-response"/>
-                <url value="${reasonReferenceLink}"/>
+                <url value="/${reasonReferenceLink}"/>
             </operation>
         </action>
         <action>

@@ -44,7 +44,7 @@
     </variable>
     <variable>
         <name value="endpointId"/>
-        <path value="ImagingStudy/endpoint/reference"/>
+        <expression value="ImagingStudy.endpoint.reference.replaceMatches('.*Endpoint/','').replaceMatches('/_history.*','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
     <variable>
@@ -99,7 +99,7 @@
                 <accept value="json"/>
                 <encodeRequestUrl value="true"/>
                 <responseId value="endpoint-read-response"/>
-                <url value="${endpointId}"/>
+                <url value="/${endpointId}"/>
             </operation>
         </action>
         <action>
