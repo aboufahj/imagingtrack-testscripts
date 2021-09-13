@@ -133,6 +133,10 @@
                 <description value="Read the WADO study resource"/>
                 <accept code='multipart/related; type="application/dicom"' />
                 <encodeRequestUrl value="true"/>
+                <requestHeader>
+                    <field value="Accept" />
+                    <value value='multipart/related; type="application/dicom"' />
+                </requestHeader>
                 <responseId value="wado-read-response"/>
                 <url value="${wadoUrl}/studies/${studyUid}"/>
             </operation>
