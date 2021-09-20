@@ -21,14 +21,6 @@
     </contact>
     <description value="TestScript to simulate an EMR capacity to share ImagingStudy and Endpoint resources."/>
     <copyright value="HL7 2021"/>
-    <origin>
-        <index value="1"/>
-        <profile>
-            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types"/>
-            <code value="FHIR-Client"/>
-            <display value="FHIR Client"/>
-        </profile>
-    </origin>
     <destination>
         <index value="1"/>
         <profile>
@@ -131,7 +123,6 @@
                 </type>
                 <resource value="ImagingStudy"/>
                 <description value="Read the WADO study resource"/>
-                <accept code='multipart/related; type="application/dicom"' />
                 <encodeRequestUrl value="true"/>
                 <requestHeader>
                     <field value="Accept" />
