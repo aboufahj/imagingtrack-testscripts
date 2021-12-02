@@ -45,10 +45,16 @@
         <sourceId value="endpoint-read-response"/>
     </variable>
     <variable>
+        <name value="wadoSuffix"/>
+        <expression value="iif(Endpoint.connectionType.code = 'dicom-wado-rs', '/studies/' , '?RequestType=wado&amp;contentType=application/dicom&amp;studyUID=')"/>
+        <sourceId value="endpoint-read-response"/>
+    </variable>
+    <variable>
         <name value="studyUid"/>
         <expression value="ImagingStudy.identifier.where(system = 'urn:dicom:uid')[0].value.replaceMatches('urn:oid:','')"/>
         <sourceId value="imagingstudy-read-response"/>
     </variable>
+
     <test>
         <name value="FHIREnhancedViewer_ImagingStudy"/>
         <description value="This tests the capacity of a FHIR Server to share ImagingStudy resource."/>
@@ -129,7 +135,7 @@
                     <value value='multipart/related; type="application/dicom"' />
                 </requestHeader>
                 <responseId value="wado-read-response"/>
-                <url value="${wadoUrl}/studies/${studyUid}"/>
+                <url value="${wadoUrl}${wadoSuffix}${studyUid}"/>
             </operation>
         </action>
         <action>
