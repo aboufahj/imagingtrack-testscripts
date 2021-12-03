@@ -120,7 +120,7 @@
     </test>
     <test>
         <name value="FHIREnhancedViewer_WADO"/>
-        <description value="This tests the capacity of a DICOM server to retrieve the study via WADO RS."/>
+        <description value="This tests the capacity of a DICOM server to retrieve the study via WADO."/>
         <action>
             <operation>
                 <type>
@@ -130,6 +130,7 @@
                 <resource value="ImagingStudy"/>
                 <description value="Read the WADO study resource"/>
                 <encodeRequestUrl value="true"/>
+                <method value="head" />
                 <requestHeader>
                     <field value="Accept" />
                     <value value='multipart/related; type="application/dicom"' />
