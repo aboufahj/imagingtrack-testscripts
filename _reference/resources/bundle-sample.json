@@ -11,36 +11,22 @@
             "http://hl7.org/fhir/uv/radiation-dose-summary/StructureDefinition/xray-radiation-dose-summary"
           ]
         },
-        "identifier": [
+       "partOf": [
           {
-            "type": {
-              "coding": [
-                {
-                  "system": "http://hl7.org/fhir/uv/radiation-dose-summary/CodeSystem/dicom-identifier-type",
-                  "code": "study-instance-uid",
-                  "display": "Study Instance UID"
-                }
-              ]
-            },
-            "system": "urn:dicom:uid",
-            "value": "urn:oid:1.2.840.121.3.32.0.1.25"
-          },
-          {
-            "type": {
-              "coding": [
-                {
-                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                  "code": "ACSN",
-                  "display": "Accession ID"
-                }
-              ]
-            },
-            "value": "AN1232234"
-          }
-        ],
-        "partOf": [
-          {
-            "reference": "urn:uuid:f1738bb1-6f51-4d6b-ad7a-d8c933cf0cf1"
+            "reference": "urn:uuid:f1738bb1-6f51-4d6b-ad7a-d8c933cf0cf1",
+            "identifier" : {
+              "type" : {
+                "coding" : [
+                  {
+                    "system" : "http://hl7.org/fhir/uv/radiation-dose-summary/CodeSystem/dicom-identifier-type",
+                    "code" : "study-instance-uid",
+                    "display" : "Study Instance UID"
+                  }
+                ]
+              },
+              "system" : "urn:dicom:uid",
+              "value" : "urn:oid:1.2.840.121.3.32.0.1.25"
+            }
           }
         ],
         "status": "final",
@@ -257,10 +243,6 @@
       "fullUrl": "urn:uuid:f1738bb1-6f51-4d6b-ad7a-d8c933cf0cf1",
       "resource": {
         "resourceType": "ImagingStudy",
-        "text": {
-          "status": "generated",
-          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><p><b>identifier</b>: id: urn:oid:1.2.840.121.3.32.0.1.25, Accession ID: AN1232234</p><p><b>status</b>: available</p><p><b>subject</b>: <a href=\"Patient-56.html\">Pascale Dupont. Generated Summary: id: PAT3421; Pascale Dupony ; gender: female; birthDate: 1990-03-18</a></p><p><b>started</b>: Jan 23, 2019, 11:45:30 AM</p></div>"
-        },
         "identifier": [
           {
             "system": "urn:dicom:uid",
