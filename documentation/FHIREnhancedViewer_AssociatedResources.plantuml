@@ -1,0 +1,106 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+  ArrowColor #005500
+  LifeLineBorderColor Black
+  ActorFontColor Black
+  ActorBorderColor Black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor #c9f4ff
+  ActorBackgroundColor #c9f4ff
+}
+
+actor "Tester" as tester
+participant "Viewer Script" as viewer
+participant "FHIR Server" as server
+
+tester -> viewer : Provide ImagingStudy ID
+
+group read
+  viewer -> server : FHIR GET ImagingStudy resource
+  activate server #b3ffd7
+  server  -> viewer: Return ImagingStudy resource
+  deactivate server
+end
+
+group search_RadiationSummary_id
+  viewer -> server : FHIR SEARCH Radiation Summary resources using ImagingStudy/id
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of Observation resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_RadiationSummary_identifier
+  viewer -> server : FHIR SEARCH Radiation Summary resources using ImagingStudy/identifier
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of Observation resources
+  deactivate server
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_Observation_id
+  viewer -> server : FHIR SEARCH Observation resources using ImagingStudy/id
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of Observation resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_Observation_identifier
+  viewer -> server : FHIR SEARCH Observation resources using ImagingStudy/identifier
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of Observation resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_ClinicalImpression_id
+  viewer -> server : FHIR SEARCH ClinicalImpression resources using ImagingStudy/id
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ClinicalImpression resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_ClinicalImpression_identifier
+  viewer -> server : FHIR SEARCH ClinicalImpression resources using ImagingStudy/identifier
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ClinicalImpression resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_ChargeItem_id
+  viewer -> server : FHIR SEARCH ChargeItem resources using ImagingStudy/id
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ChargeItem resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_ChargeItem_identifier
+  viewer -> server : FHIR SEARCH ChargeItem resources using ImagingStudy/identifier
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of ChargeItem resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+
+group search_DiagnosticReport_id
+  viewer -> server : FHIR SEARCH DiagnosticReport resources using ImagingStudy/basedOn/identifier
+  activate server #b3ffd7
+  server  -> viewer: Return Bundle of DiagnosticReport resources
+  deactivate server
+
+  viewer -> viewer : check Bundle.total > 0
+end
+@enduml

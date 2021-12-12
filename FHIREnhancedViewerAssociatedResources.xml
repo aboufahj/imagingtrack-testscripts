@@ -1,0 +1,312 @@
+<TestScript xmlns="http://hl7.org/fhir">
+    <id value="FHIREnhancedViewerAssociatedResources"/>
+    <url value="https://build.fhir.org/ig/HL7/TestScript-FHIREnhancedViewerAssociatedResources.json"/>
+    <name value="FHIREnhancedViewerAssociatedResources"/>
+    <status value="active"/>
+    <date value="2021-12-12"/>
+    <publisher value="HL7 Imaging Integration Workgroup"/>
+    <contact>
+        <name value="HL7 Imaging Integration Workgroup"/>
+        <telecom>
+            <system value="url"/>
+            <value value="http://www.hl7.org/Special/committees/imagemgt/index.cfm"/>
+        </telecom>
+    </contact>
+    <contact>
+        <name value="Abderrazek Boufahja"/>
+        <telecom>
+            <system value="email"/>
+            <value value="abderrazek.boufahja@ge.com"/>
+        </telecom>
+    </contact>
+    <description value="TestScript to simulate a viewer searching and retrieving associated resources with ImagingStudy resources."/>
+    <copyright value="HL7 2021"/>
+    <destination>
+        <index value="1"/>
+        <profile>
+            <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-destination-types"/>
+            <code value="FHIR-Server"/>
+            <display value="FHIR Server"/>
+        </profile>
+    </destination>
+    <variable>
+        <name value="imagingStudyResourceId"/>
+        <defaultValue value="example-xr"/>
+        <description value="Enter the ImagingStudy ID"/>
+    </variable>
+    <variable>
+        <name value="identifierValue"/>
+        <expression value="ImagingStudy.identifier.where(system = 'urn:dicom:uid')[0].value"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+    <variable>
+        <name value="basedonLink"/>
+        <expression value="ImagingStudy.basedOn[0].reference.replaceMatches('.*(CarePlan|ServiceRequest|Appointment|AppointmentResponse|Task)/','').replaceMatches('/_history.*','')"/>
+        <sourceId value="imagingstudy-read-response"/>
+    </variable>
+    <test>
+        <name value="ImagingStudy_read"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources through READ operation."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Read the ImagingStudy ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${imagingStudyResourceId}"/>
+                <responseId value="imagingstudy-read-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200,201"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="search_rds_id"/>
+        <description value="Search for Radiation Dose Summary resources using ImagingStudy/id."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="Observation"/>
+                <description value="Search the Observation resources by ImagingStudy/id : ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?part-of=ImagingStudy/${imagingStudyResourceId}&amp;code=73569-6"/>
+                <responseId value="rds-search-id-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="search_rds_identifier"/>
+        <description value="Search for Radiation Dose Summary resources using ImagingStudy/identifier."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="Observation"/>
+                <description value="Search the Observation resources by ImagingStudy/identifier : ${identifierValue}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?part-of.identifier=${identifierValue}&amp;code=73569-6"/>
+                <responseId value="rds-search-ident-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+
+    <test>
+        <name value="search_observation_id"/>
+        <description value="Search for Observation resources using ImagingStudy/id."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="Observation"/>
+                <description value="Search the Observation resources by ImagingStudy/id : ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?part-of=ImagingStudy/${imagingStudyResourceId}"/>
+                <responseId value="obs-search-id-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="search_observation_identifier"/>
+        <description value="Search for Observation resources using ImagingStudy/identifier."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="Observation"/>
+                <description value="Search the Observation resources by ImagingStudy/identifier : ${identifierValue}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?part-of.identifier=${identifierValue}"/>
+                <responseId value="obs-search-ident-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+
+    <test>
+        <name value="search_clin_id"/>
+        <description value="Search for ClinicalImpression resources using ImagingStudy/id."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ClinicalImpression"/>
+                <description value="Search the ClinicalImpression resources by ImagingStudy/id : ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?investigation=ImagingStudy/${imagingStudyResourceId}"/>
+                <responseId value="clin-search-id-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="search_clin_identifier"/>
+        <description value="Search for ClinicalImpression resources using ImagingStudy/identifier."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ClinicalImpression"/>
+                <description value="Search the ClinicalImpression resources by ImagingStudy/identifier : ${identifierValue}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?investigation.identifier=${identifierValue}"/>
+                <responseId value="clin-search-ident-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+
+    <test>
+        <name value="search_charge_id"/>
+        <description value="Search for ChargeItem resources using ImagingStudy/id."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ChargeItem"/>
+                <description value="Search the ChargeItem resources by ImagingStudy/id : ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?service=ImagingStudy/${imagingStudyResourceId}"/>
+                <responseId value="charge-search-id-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="search_charge_identifier"/>
+        <description value="Search for ChargeItem resources using ImagingStudy/identifier."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="ChargeItem"/>
+                <description value="Search the ChargeItem resources by ImagingStudy/identifier : ${identifierValue}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?service.identifier=${identifierValue}"/>
+                <responseId value="charge-search-ident-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+
+    <test>
+        <name value="search_diagnostic_report"/>
+        <description value="Search for DiagnosticReport resources using related referenced ServiceRequest."/>
+        <action>
+            <assert>
+                <description value="Confirm that there are a basedon element."/>
+                <operator value="notEmpty"/>
+                <path value="ImagingStudy/basedOn/reference"/>
+                <sourceId value="imagingstudy-read-response"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="search"/>
+                </type>
+                <resource value="DiagnosticReport"/>
+                <description value="Search the DiagnosticReport resources by ServiceRequest/id : ${basedonLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="?based-on=ServiceRequest/${basedonLink}"/>
+                <responseId value="basedon-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the total number of response is greater than 1."/>
+                <expression value="Bundle.total.toInteger() &gt;= 1"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+</TestScript>
