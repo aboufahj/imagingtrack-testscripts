@@ -4,7 +4,7 @@ This repo contains test scripts used in :
 * [HL7 Connectathon 28](https://confluence.hl7.org/display/FHIR/2021+-+09+Connectathon+28) within the [imaging track](https://confluence.hl7.org/display/FHIR/2021-09+Imaging+Track)
 * [HL7 Connectathon 29](https://confluence.hl7.org/display/FHIR/2022+-+01+Connectathon+29) within the [imaging track](https://confluence.hl7.org/display/FHIR/2022-01+Imaging+Track)
 
-The repo contains 8 test scripts, related to Radiation Dose Summary testing, and ImagingStudy testing. The scripts are related to three scenarios : 
+The repo contains 8 test scripts, related to [Radiation Dose Summary](https://hl7.org/fhir/uv/radiation-dose-summary/2022Jan/) testing, and [ImagingStudy](https://hl7.org/fhir/imagingstudy.html) testing. The scripts are related to three scenarios : 
 
 * scenario 1: FHIR-enhanced Enterprise Viewer
     * FHIREnhancedViewerEndpointAccess.xml    : TestScript to simulate an EMR capacity to share ImagingStudy and Endpoint resources.
