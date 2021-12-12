@@ -96,7 +96,7 @@ group search_ChargeItem_identifier
 end
 
 group search_DiagnosticReport_id
-  viewer -> server : FHIR SEARCH DiagnosticReport resources using ImagingStudy/basedOn/identifier
+  viewer -> server : FHIR SEARCH DiagnosticReport resources using ImagingStudy/basedOn/id
   activate server #b3ffd7
   server  -> viewer: Return Bundle of DiagnosticReport resources
   deactivate server
