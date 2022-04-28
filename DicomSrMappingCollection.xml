@@ -1,0 +1,147 @@
+<TestScript xmlns="http://hl7.org/fhir">
+   <id value="DicomSrMappingCollection"/>
+   <url value="https://build.fhir.org/ig/HL7/dicom-sr/"/>
+   <name value="DicomSrMappingCollection"/>
+   <status value="active"/>
+   <date value="2022-04-28"/>
+   <publisher value="HL7 Imaging Integration Workgroup"/>
+   <contact>
+      <name value="HL7 Imaging Integration Workgroup"/>
+      <telecom>
+         <system value="url"/>
+         <value value="http://www.hl7.org/Special/committees/imagemgt/index.cfm"/>
+      </telecom>
+   </contact>
+   <contact>
+      <name value="Abderrazek Boufahja"/>
+      <telecom>
+         <system value="email"/>
+         <value value="abderrazek.boufahja@ge.com"/>
+      </telecom>
+   </contact>
+   <description value="TestScript to collect FHIR Observations and resources related to DICOM SR mapping"/>
+   <destination>
+      <index value="1"/>
+      <profile>
+         <system value="http://terminology.hl7.org/CodeSystem/testscript-profile-destination-types"/>
+         <code value="FHIR-Server"/>
+         <display value="FHIR Server"/>
+      </profile>
+   </destination>
+   <variable>
+      <name value="imResourceId"/>
+      <defaultValue value="2535717"/>
+      <description value="Enter the resource ID of the Observation describing a Imaging Measurement, registered in your server."/>
+   </variable>
+   <variable>
+        <name value="subjectLink"/>
+        <expression value="Observation.subject.reference.replaceMatches('.*Patient/','').replaceMatches('/_history.*','')"/>
+        <sourceId value="im-read-response"/>
+    </variable>
+    <variable>
+        <name value="imagingStudyResourceId"/>
+        <expression value="Observation.partOf.reference.replaceMatches('.*ImagingStudy/','').replaceMatches('/_history.*','')"/>
+        <sourceId value="im-read-response"/>
+    </variable>
+    
+   <test>
+      <name value="Observation_read"/>
+      <description value="Read provided Observation - the Imaging Measurement"/>
+      <!-- Read the Imaging Measurement resource, initialize the search parameters -->
+      <action>
+         <operation>
+            <type>
+               <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+               <code value="read"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Read the Imaging Measurement observation ${imResourceId}"/>
+            <accept value="json"/>
+            <encodeRequestUrl value="true"/>
+            <params value="/${imResourceId}"/>
+            <responseId value="im-read-response"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <direction value="response"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Observation is not empty."/>
+            <direction value="response"/>
+            <operator value="notEmpty"/>
+            <path value="Observation/id"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test>
+        <name value="DicomSrMappingCollection_TestSubjectLink"/>
+        <description value="This tests the capacity of a FHIR Server to share subject resource."/>
+        <action>
+            <assert>
+                <description value="Confirm that there are a subject element."/>
+                <operator value="notEmpty"/>
+                <path value="Observation/subject/reference"/>
+                <sourceId value="im-read-response"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <resource value="Patient"/>
+                <description value="Read the subject resource ${subjectLink}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${subjectLink}"/>
+                <responseId value="subject-read-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200,201"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+     <test>
+        <name value="DicomSrMappingCollection_RelatedResources"/>
+        <description value="This tests the capacity of a FHIR Server to share ImagingStudy resources."/>
+        <action>
+            <operation>
+                <type>
+                    <system value="http://terminology.hl7.org/CodeSystem/testscript-operation-codes"/>
+                    <code value="read"/>
+                </type>
+                <resource value="ImagingStudy"/>
+                <description value="Read the ImagingStudy ${imagingStudyResourceId}"/>
+                <accept value="json"/>
+                <encodeRequestUrl value="true"/>
+                <params value="/${imagingStudyResourceId}"/>
+                <responseId value="imagingstudy-read-response"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+                <direction value="response"/>
+                <operator value="in"/>
+                <responseCode value="200,201"/>
+                <warningOnly value="false"/>
+            </assert>
+        </action>
+    </test>
+</TestScript>

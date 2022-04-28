@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+skinparam sequence {
+  ArrowColor #005500
+  LifeLineBorderColor Black
+  ActorFontColor Black
+  ActorBorderColor Black
+  ParticipantBorderColor Black
+  ParticipantBackgroundColor #c9f4ff
+  ActorBackgroundColor #c9f4ff
+}
+
+actor "Tester" as tester
+participant "Viewer Script" as viewer
+participant "FHIR Server" as server
+
+tester -> viewer : Provide Imaging Measurement Resource ID
+
+group read
+  viewer -> server : FHIR GET Imaging Measurement Observation resource
+  activate server #b3ffd7
+  server  -> viewer: Return Imaging Measurement Observation resource
+  deactivate server
+end
+
+group read_patient
+  viewer -> server : FHIR GET related Patient resource
+  activate server #b3ffd7
+  server  -> viewer: Return Patient resource
+  deactivate server
+
+  viewer -> viewer : check response 200,201
+end
+
+group read_imaging_study
+  viewer -> server : FHIR GET related ImagingStudy resource
+  activate server #b3ffd7
+  server  -> viewer: Return ImagingStudy resource
+  deactivate server
+
+  viewer -> viewer : check response 200,201
+end
+
+
+@enduml
